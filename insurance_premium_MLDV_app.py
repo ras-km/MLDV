@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sklearn import datasets
-drom sklearn.ensemble impport RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 st.write("""
 This app predicts the premium for user after they input the required information""")
