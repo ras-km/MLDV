@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "a56c0bc2",
    "metadata": {},
    "outputs": [],
@@ -15,7 +15,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "043ea479",
    "metadata": {},
    "outputs": [],
@@ -26,7 +26,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "5e63134e",
    "metadata": {},
    "outputs": [],
@@ -36,7 +36,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "efa265d1",
    "metadata": {},
    "outputs": [],
@@ -76,7 +76,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "44b09c10",
    "metadata": {},
    "outputs": [],
@@ -86,7 +86,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "95b76449",
    "metadata": {},
    "outputs": [],
@@ -97,7 +97,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "beeec01f",
    "metadata": {},
    "outputs": [],
@@ -109,7 +109,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "ffaffb85",
    "metadata": {},
    "outputs": [],
@@ -120,7 +120,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "5dde7f37",
    "metadata": {},
    "outputs": [],
@@ -131,7 +131,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "f0146eba",
    "metadata": {},
    "outputs": [],
@@ -142,7 +142,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "ddde29dd",
    "metadata": {},
    "outputs": [],
@@ -154,7 +154,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": None ,
    "id": "e4afc50d",
    "metadata": {},
    "outputs": [],
