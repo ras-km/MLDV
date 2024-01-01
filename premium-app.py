@@ -6,6 +6,7 @@ from sklearn.metrics import mean_absolute_error
 
 # Load your dataset (replace with your actual dataset)
 med_premium = pd.read_csv('Medicalpremium.csv')
+med_premium_feat = med_premium.drop(columns=[target_variable])
 
 # Assuming the target variable is named 'target', adjust as needed
 X = med_premium_feat.drop('PremiumPrice', axis=1)
