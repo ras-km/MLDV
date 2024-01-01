@@ -84,7 +84,7 @@ def user_input_features():
 features = user_input_features()
 
 # Display user input
-st.subheader('User Input parameters')
+st.subheader('User Input Parameters')
 st.write(features)
 
 # Load the trained model
