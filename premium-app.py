@@ -36,8 +36,8 @@ clf = RandomForestRegressor()
 clf.fit(X_train, y_train)
 
 # Save the trained model using joblib
-model_filename = "random_forest_model.pkl"
-joblib.dump(clf, model_filename)
+
+joblib.dump(clf, "random_forest_model.pkl")
 
 # Save the scaler using joblib
 scaler_filename = 'scaler.joblib'
