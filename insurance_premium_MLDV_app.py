@@ -45,17 +45,6 @@ rf_model.fit(X_train_scaled, y_train)
 # Make predictions on the test set
 y_test_pred = rf_model.predict(X_test_scaled)
 
-# Fit regression model
-model = ensemble.RandomForestRegressor(
-    n_estimators=1379, #how many decision trees to build
-    #learning_rate=0.02, #how much decision trees influence overall prediction
-    max_depth=6, #maximum depth of the individual regression estimators.
-    min_samples_leaf=4, #The minimum number of samples required to be at a leaf node.
-    max_features=0.59, #If float, then max_features is a percentage (max_features * n_features) features are considered at each split.
-    bootstrap=False,
-    random_state=7
-)
-model.fit(X_train, y_train)
 
 # Save the model
 joblib.dump(model, 'random_forest_model.pkl')
