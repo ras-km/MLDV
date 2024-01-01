@@ -84,7 +84,7 @@ st.subheader('User Input parameters')
 st.write(features)
 
 # Print the feature names during prediction
-print("Feature names during prediction:", list(features.keys()))
+#print("Feature names during prediction:", list(features.keys()))
 # Make prediction
 prediction = clf.predict(pd.DataFrame(features, index=[0]))
 
