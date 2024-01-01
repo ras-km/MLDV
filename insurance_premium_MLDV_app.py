@@ -133,12 +133,13 @@ def user_input_features():
 features = user_input_features()
 
 # Load the trained model
-loaded_model = joblib.load(model_filename)
+loaded_model = joblib.load('random_forest_model.pkl')
 
 # Load the scaler
-loaded_scaler = joblib.load(scaler_filename)
+loaded_scaler = joblib.load('scaler.pkl')
 
 # Preprocess input features (e.g., scale them)
+features_array = [list(features.values())]
 features_scaled = loaded_scaler.transform(features)
 
 # Make prediction using the loaded model
