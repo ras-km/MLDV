@@ -12,7 +12,7 @@ X_train = med_premium_feat
 y_train = med_premium['PremiumPrice']
 
 # Assuming the target variable is named 'target', adjust as needed
-X = med_premium_feat.drop('PremiumPrice', axis=1)
+X = med_premium_feat
 y = med_premium['PremiumPrice']
 
 # Print basic information about the loaded dataset
