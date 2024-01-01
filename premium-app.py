@@ -20,7 +20,7 @@ st.write("Loaded Dataset Information:")
 st.write(med_premium .info())
 
 # Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=7)
+X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.3, random_state=7)
 
 # Print shapes of train and test sets
 st.write("Shapes after train-test split:")
