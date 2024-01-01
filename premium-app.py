@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.datasets import load_Medicampremium  # Use a different dataset
+from sklearn.datasets import load_Medicalpremium  # Use a different dataset
 
 # Load the Iris dataset
-iris = load_Medicampremium.csv()
-X = Medicampremium.data
-y = Medicampremium.target
+iris = load_Medicalpremium.csv()
+X = Medicalpremium.data
+y = Medicalpremium.target
 
 # Split the dataset into training and testing sets
 from sklearn.model_selection import train_test_split
