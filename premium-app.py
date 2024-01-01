@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.datasets import Medicalpremium  # Use a different dataset
+from sklearn.datasets import Medicalpremium 
 
 # Use a locally available dataset for testing
-from sklearn.datasets import load_diabetes
 premium = Medicalpremium()
 X = premium.data
 y = premium.target
