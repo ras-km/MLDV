@@ -13,7 +13,7 @@ y = med_premium['PremiumPrice']
 
 # Print basic information about the loaded dataset
 st.write("Loaded Dataset Information:")
-st.write(df.info())
+st.write(med_premium .info())
 
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=7)
