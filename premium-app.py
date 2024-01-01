@@ -35,6 +35,10 @@ clf = RandomForestRegressor()
 # Train the model
 clf.fit(X_train, y_train)
 
+# Save the trained model using joblib
+model_filename = "premium_model.pkl"
+joblib.dump(clf, model_filename)
+
 # Streamlit app
 st.write("""
 # Premium Prediction App
