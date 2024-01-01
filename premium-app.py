@@ -8,8 +8,8 @@ from sklearn.metrics import mean_absolute_error
 df = pd.read_csv('Medicalpremium.csv')
 
 # Assuming the target variable is named 'target', adjust as needed
-X = med_premium_feat.drop('target', axis=1)
-y = med_premium['target']
+X = df.drop('target', axis=1)
+y = df['target']
 
 # Print basic information about the loaded dataset
 st.write("Loaded Dataset Information:")
