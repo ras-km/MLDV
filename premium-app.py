@@ -11,8 +11,19 @@ df = pd.read_csv('Medicalpremium.csv')
 X = med_premium_feat.drop('target', axis=1)
 y = med_premium['target']
 
+# Print basic information about the loaded dataset
+st.write("Loaded Dataset Information:")
+st.write(df.info())
+
 # Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=7)
+
+# Print shapes of train and test sets
+st.write("Shapes after train-test split:")
+st.write("X_train shape:", X_train.shape)
+st.write("X_test shape:", X_test.shape)
+st.write("y_train shape:", y_train.shape)
+st.write("y_test shape:", y_test.shape)
 
 # Create the RandomForestRegressor model
 clf = RandomForestRegressor()
