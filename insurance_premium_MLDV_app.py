@@ -42,28 +42,27 @@ rf_model = RandomForestRegressor(random_state=7)
 # Train the Random Forest Regressor model on the training set
 rf_model.fit(X_train_scaled, y_train)
 
-# Make predictions on the test set
-y_test_pred = rf_model.predict(X_test_scaled)
-
-
 # Save the model
-joblib.dump(model, 'random_forest_model.pkl')
+joblib.dump(rf_model, 'random_forest_model.pkl')
 # Save the scaler if you used one during preprocessing
 joblib.dump(scaler, 'scaler.pkl')
+
+# Make predictions on the test set
+y_test_pred = rf_model.predict(X_test_scaled)
 
 def predict_premium(features):
     
     # Load the model
-    model = joblib.load('random_forest_model.pkl')
+    loaded_model  = joblib.load('random_forest_model.pkl')
     
     # Load the scaler
-    scaler = joblib.load('scaler.pkl')
+    loaded_scaler = joblib.load('scaler.pkl')
 
     # Preprocess input features (e.g., scale them)
-    features_scaled = scaler.transform(features)
+    features_scaled = loaded_scaler.transform(features)
 
     # Make predictions
-    predictions = model.predict(features_scaled)
+    predictions = loaded_model.predict(features_scaled)
 
     return predictions
 
