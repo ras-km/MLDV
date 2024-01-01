@@ -1,19 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#!/usr/bin/env python
-# coding: utf-8
-
 import streamlit as st
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor  # Corrected import
+from sklearn.ensemble import RandomForestRegressor
 
-# Load the insurance premium dataset
-from sklearn.datasets import fetch_openml
-insurance = fetch_openml(name='insurance_premium', version=1)
+# Use a locally available dataset for testing
+from sklearn.datasets import load_diabetes
+insurance = load_diabetes()
 X = insurance.data
 y = insurance.target
 
