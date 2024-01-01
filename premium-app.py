@@ -4,6 +4,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 
+target_variable = 'PremiumPrice'
+
 # Load your dataset (replace with your actual dataset)
 med_premium = pd.read_csv('Medicalpremium.csv')
 med_premium_feat = med_premium.drop(columns=[target_variable])
