@@ -2,125 +2,144 @@ import streamlit as st
 import pandas as pd
 from sklearn import datasets
 from sklearn.ensemble import RandomForestRegressor
-
-
-# In[ ]:
-
+import joblib
 
 st.write("""
 This app predicts the premium for user after they input the required information""")
 
+target_variable = 'PremiumPrice'
+med_premium_feat = med_premium.drop(columns=[target_variable])
+# Extract features and target variable from med_premium
+X_train = med_premium_feat
+y_train = med_premium[target_variable]
 
-# In[ ]:
+# Extract features from premium_features (ensure it has the same columns as X_train)
+X_test = med_premium[X_train.columns]
+
+# Create arrays X to contain features and y for target only
+X = med_premium_feat.values
+y = med_premium['PremiumPrice'].values
+
+# Split the data into training and testing sets
+X_train_temp, X_test, y_train_temp, y_test = train_test_split(X, y, test_size=0.3, random_state=7)
+
+# Further split the training set into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X_train_temp, y_train_temp, test_size=0.3, random_state=7)
+
+# Standardize features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_val_scaled = scaler.transform(X_val)
+X_test_scaled = scaler.transform(X_test)
+
+# Initialize the Random Forest Regressor model
+rf_model = RandomForestRegressor(random_state=7)
+
+# Train the Random Forest Regressor model on the training set
+rf_model.fit(X_train_scaled, y_train)
+
+# Make predictions on the test set
+y_test_pred = rf_model.predict(X_test_scaled)
+
+# Fit regression model
+model = ensemble.RandomForestRegressor(
+    n_estimators=1379, #how many decision trees to build
+    #learning_rate=0.02, #how much decision trees influence overall prediction
+    max_depth=6, #maximum depth of the individual regression estimators.
+    min_samples_leaf=4, #The minimum number of samples required to be at a leaf node.
+    max_features=0.59, #If float, then max_features is a percentage (max_features * n_features) features are considered at each split.
+    bootstrap=False,
+    random_state=7
+)
+model.fit(X_train, y_train)
+
+# Save the model
+joblib.dump(model, 'random_forest_model.pkl')
+# Save the scaler if you used one during preprocessing
+joblib.dump(scaler, 'scaler.pkl')
+
+def predict_premium(features):
+    
+    # Load the model
+    model = joblib.load('random_forest_model.pkl')
+    
+    # Load the scaler
+    scaler = joblib.load('scaler.pkl')
+
+    # Preprocess input features (e.g., scale them)
+    features_scaled = scaler.transform(features)
+
+    # Make predictions
+    predictions = model.predict(features_scaled)
+
+    return predictions
+
+def estimate_insurance_premium_rf(model, features):
+    # Assuming 'model' is a trained random forest model
+
+    # Convert the input features to a 2D array
+    input_features = [list(features.values())]
+
+    # Make predictions using the random forest model
+    premium_value = model.predict(input_features)
+
+    # Assuming premium_value is the estimated insurance premium
+    return premium_value[0]
+
 
 
 st.sidebar.header('User Input Parameters')
 
 
-# In[ ]:
-
-
 def user_input_features():
-    diabetes = st.sidebar.dropdown('Diabetes', 0, 1) 
-    blood_pressure_problems = st.sidebar.radio('Blood pressure problems', 0, 1) 
-    any_transplants = st.sidebar.radio('Any transplants', 0, 1)
-    any_chronic_diseases = st.sidebar.radio('Any chronic diseases', 0, 1) 
-    known_allergies = st.sidebar.radio('Known allergies', 0, 1) 
-    history_of_cancer_in_family = st.sidebar.radio('History of cancer in family', 0, 1)
-    bmi = st.sidebar.slider('BMI', 0, 100) 
-    major_surgery_1 = st.sidebar.radio('Major surgery 1', 0, 1) 
-    major_surgery_2 = st.sidebar.radio('Major surgery 2', 0, 1) 
-    major_surgery_3 = st.sidebar.radio('Major surgery 3', 0, 1)
-    age_31_40 = st.sidebar.radio('Age 31-40', 0, 1) 
-    age_41_50 = st.sidebar.radio('Age 41-50', 0, 1) 
-    age_51_60 = st.sidebar.radio('Age 51-60', 0, 1) 
-    age_61_70 = st.sidebar.radio('Age 61-70', 0, 1)
-    data = {'diabetes': diabetes,
-           'blood_pressure_problems': blood_pressure_problems,
-           'any_transplants': any_transplants,
-           'any_chronic_diseases': any_chronic_diseases,
-           'known_allergies': known_allergies,
-           'history_of_cancer_in_family': history_of_cancer_in_family,
-           'bmi': bmi,
-           'major_surgery_1': major_surgery_1,
-           'major_surgery_2': major_surgery_2,
-           'major_surgery_3': major_surgery_3,
-           'age_31_40': age_31_40,
-           'age_41_50': age_41_50,
-           'age_51_60': age_51_60,
-           'age_61_70': age_61_70}
-    features = pd.DataFrame(data, index=[0])
+    # Use radio buttons for yes/no selection
+    Diabetes = st.sidebar.radio('Diabetes', [0, 1])
+    BloodPressureProblems = st.sidebar.radio('Blood Pressure Problems', [0, 1])
+    AnyTransplants = st.sidebar.radio('Any Transplants', [0, 1])
+    AnyChronicDiseases = st.sidebar.radio('Any Chronic Diseases', [0, 1])
+    KnownAllergies = st.sidebar.radio('Known Allergies', [0, 1])
+    HistoryOfCancerInFamily = st.sidebar.radio('History of Cancer in Family', [0, 1])
+
+    # Use sliders for continuous features
+    BMI = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)  # Assuming BMI range is 0.0 to 100.0
+    
+    # Use dropdown for age group selection
+    AgeGroup = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
+
+    # Use dropdown for major surgeries selection
+    MajorSurgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
+    
+    # Create a dictionary to hold user input
+    features = {
+        'Diabetes': Diabetes,
+        'Blood Pressure Problems': BloodPressureProblems,
+        'Any Transplants': AnyTransplants,
+        'Any Chronic Diseases': AnyChronicDiseases,
+        'Known Allergies': KnownAllergies,
+        'History Of Cancer In Family': HistoryOfCancerInFamily,
+        'BMI': BMI,
+        'Age Group': AgeGroup,
+        'Major Surgeries': MajorSurgeries
+    }
     return features
 
 
-# In[ ]:
 
+# User input
+features = user_input_features()
 
-df = user_input_features()
+# Load the trained model
+loaded_model = joblib.load(model_filename)
 
+# Load the scaler
+loaded_scaler = joblib.load(scaler_filename)
 
-# In[ ]:
+# Preprocess input features (e.g., scale them)
+features_scaled = loaded_scaler.transform(features)
 
-
-st.subheader('User Input parameters')
-st.write(df)
-
-
-# In[ ]:
-
-
-premium = datasets.load_med_premium()
-X = med_premium_feat.data
-Y = med+premium.target
-
-
-# In[ ]:
-
-
-clf = RandomForestRegressor
-clf.fit(X,Y)
-
-
-# In[ ]:
-
-
-prediction = clf.predict(df)
-prediction_proba = clf.predict_proba(df)
-
-
-# In[ ]:
-
-
-st,subheader('Class labels and their corresponding index number')
-st.write(med_premium.target_names)
-
-
-# In[ ]:
-
-
+# Make prediction using the loaded model
+prediction = loaded_model.predict(features_scaled)
+# Display prediction
 st.subheader('Prediction')
-st.write(med_premium.target_names[prediction])
-#st.write(prediction)
+st.write(f"The predicted premium is: {prediction[0]}")
 
-
-# In[ ]:
-
-
-st.subheader('Prediction Probability')
-st.write(prediction_proba)
-
-
-
-# In[ ]:
-
-
-st.subheader('Prediction')
-st.write(med_premium.target_names[prediction])
-#st.write(prediction)
-
-
-# In[ ]:
-
-
-st.subheader('Prediction Probability')
-st.write(prediction_proba)
