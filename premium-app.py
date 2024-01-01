@@ -20,20 +20,20 @@ clf.fit(X_train, y_train)
 
 # Define the user input function
 def user_input_features():
-    diabetes = st.sidebar.slider('Diabetes', 0, 1)
-    blood_pressure_problems = st.sidebar.slider('Blood pressure problems', 0, 1)
-    any_transplants = st.sidebar.slider('Any transplants', 0, 1)
-    any_chronic_diseases = st.sidebar.slider('Any chronic diseases', 0, 1)
-    known_allergies = st.sidebar.slider('Known allergies', 0, 1)
-    history_of_cancer_in_family = st.sidebar.slider('History of cancer in family', 0, 1)
+    diabetes = st.sidebar.radio('Diabetes', 0, 1)
+    blood_pressure_problems = st.sidebar.radio('Blood pressure problems', 0, 1)
+    any_transplants = st.sidebar.radio('Any transplants', 0, 1)
+    any_chronic_diseases = st.sidebar.radio('Any chronic diseases', 0, 1)
+    known_allergies = st.sidebar.radio('Known allergies', 0, 1)
+    history_of_cancer_in_family = st.sidebar.radio('History of cancer in family', 0, 1)
     bmi = st.sidebar.slider('BMI', 0, 100)
-    major_surgery_1 = st.sidebar.slider('Major surgery 1', 0, 1)
-    major_surgery_2 = st.sidebar.slider('Major surgery 2', 0, 1)
-    major_surgery_3 = st.sidebar.slider('Major surgery 3', 0, 1)
-    age_31_40 = st.sidebar.slider('Age 31-40', 0, 1)
-    age_41_50 = st.sidebar.slider('Age 41-50', 0, 1)
-    age_51_60 = st.sidebar.slider('Age 51-60', 0, 1)
-    age_61_70 = st.sidebar.slider('Age 61-70', 0, 1)
+    major_surgery_1 = st.sidebar.radio('Major surgery 1', 0, 1)
+    major_surgery_2 = st.sidebar.radio('Major surgery 2', 0, 1)
+    major_surgery_3 = st.sidebar.radio('Major surgery 3', 0, 1)
+    age_31_40 = st.sidebar.radio('Age 31-40', 0, 1)
+    age_41_50 = st.sidebar.radio('Age 41-50', 0, 1)
+    age_51_60 = st.sidebar.radio('Age 51-60', 0, 1)
+    age_61_70 = st.sidebar.radio('Age 61-70', 0, 1)
 
     data = {'diabetes': diabetes,
             'blood_pressure_problems': blood_pressure_problems,
