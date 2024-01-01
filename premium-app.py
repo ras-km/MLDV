@@ -4,9 +4,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn import datasets 
 
 # Use a locally available dataset for testing
-premium = Medicalpremium()
-X = premium.data
-y = premium.target
+med_premium = Medicalpremium()
+X = med_premium.data
+y = med_premium.target
 
 # Split the dataset into training and testing sets
 from sklearn.model_selection import train_test_split
