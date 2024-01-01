@@ -83,10 +83,11 @@ features = user_input_features()
 st.subheader('User Input parameters')
 st.write(features)
 
-# Print the feature names during prediction
-#print("Feature names during prediction:", list(features.keys()))
-# Make prediction
-prediction = clf.predict(pd.DataFrame(features, index=[0]))
+# Load the trained model
+loaded_model = joblib.load(model_filename)
+
+# Make prediction using the loaded model
+prediction = loaded_model.predict(pd.DataFrame(features, index=[0]))
 
 # Display prediction
 st.subheader('Prediction')
