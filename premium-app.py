@@ -3,10 +3,11 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import Medicalpremium  # Use a different dataset
 
-# Load the Iris dataset
-iris = Medicalpremium.csv()
-X = Medicalpremium.data
-y = Medicalpremium.target
+# Use a locally available dataset for testing
+from sklearn.datasets import load_diabetes
+premium = Medicalpremium()
+X = premium.data
+y = premium.target
 
 # Split the dataset into training and testing sets
 from sklearn.model_selection import train_test_split
