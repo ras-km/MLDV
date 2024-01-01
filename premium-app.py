@@ -5,16 +5,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 
 # Load your dataset (replace with your actual dataset)
-target_variable = 'PremiumPrice'
 med_premium = pd.read_csv('Medicalpremium.csv')
-med_premium_feat = med_premium.drop(columns=[target_variable])
+med_premium_feat = med_premium.drop(columns=['PremiumPrice'])
 
 X_train = med_premium_feat
-y_train = med_premium[target_variable]
+y_train = med_premium['PremiumPrice']
 
 # Assuming the target variable is named 'target', adjust as needed
-target_variable = 'PremiumPrice'
-X = med_premium_feat.drop(target_variable, axis=1)
+X = med_premium_feat.drop('PremiumPrice', axis=1)
 y = med_premium['PremiumPrice']
 
 # Print basic information about the loaded dataset
