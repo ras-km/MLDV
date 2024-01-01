@@ -43,27 +43,33 @@ st.sidebar.header('User Input Parameters')
 
 def user_input_features():
     # Use radio buttons for yes/no selection
-    diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'])
-    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'])
-    any_transplants = st.sidebar.radio('Any Transplants', ['No', 'Yes'])
-    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'])
-    known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'])
-    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'])
-    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)  # Assuming BMI range is 0.0 to 100.0
+    diabetes = st.sidebar.radio('Diabetes', [0, 1])
+    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', [0, 1])
+    any_transplants = st.sidebar.radio('Any Transplants', [0, 1])
+    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', [0, 1])
+    known_allergies = st.sidebar.radio('Known Allergies', [0, 1])
+    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', [0, 1])
     
     # Use dropdown for age group selection
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
 
+    # Use dropdown for major surgeries selection
+    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
+
+    # Use sliders for continuous features
+    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)  # Assuming BMI range is 0.0 to 100.0
+    
     # Create a dictionary to hold user input
     features = {
-        'Diabetes': 1 if diabetes == 'Yes' else 0,
-        'Blood Pressure Problems': 1 if blood_pressure_problems == 'Yes' else 0,
-        'Any Transplants': 1 if any_transplants == 'Yes' else 0,
-        'Any Chronic Diseases': 1 if any_chronic_diseases == 'Yes' else 0,
-        'Known Allergies': 1 if known_allergies == 'Yes' else 0,
-        'History of Cancer in Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
+        'Diabetes': diabetes,
+        'Blood Pressure Problems': blood_pressure_problems,
+        'Any Transplants': any_transplants,
+        'Any Chronic Diseases': any_chronic_diseases,
+        'Known Allergies': known_allergies,
+        'History of Cancer in Family': history_of_cancer_in_family,
         'BMI': bmi,
-        'Age Group': age_group
+        'Age Group': age_group,
+        'Major Surgeries': major_surgeries
     }
     return features
 
