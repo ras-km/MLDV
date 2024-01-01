@@ -9,7 +9,7 @@ med_premium = pd.read_csv('Medicalpremium.csv')
 target_variable = 'PremiumPrice'
 med_premium_feat = med_premium.drop(columns=[target_variable])
 # Extract features and target variable from med_premium
-X_train = med_premium_feat.drop(columns=[target_variable])
+X_train = med_premium_feat
 y_train = med_premium[target_variable]
 
 # Extract features from premium_features (ensure it has the same columns as X_train)
