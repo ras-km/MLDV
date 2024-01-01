@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
-# Use a locally available dataset for testing
-from sklearn.datasets import load_med_premium
-insurance = load_med_premium()
+# Use the correct dataset import
+from sklearn.datasets import fetch_openml
+insurance = fetch_openml(name='med_premium', version=1)
 X = med_premium.data
 y = med_premium.target
 
