@@ -3,13 +3,25 @@ import pandas as pd
 from sklearn import datasets
 from sklearn.ensemble import RandomForestRegressor
 
+
+# In[ ]:
+
+
 st.write("""
 This app predicts the premium for user after they input the required information""")
 
+
+# In[ ]:
+
+
 st.sidebar.header('User Input Parameters')
 
+
+# In[ ]:
+
+
 def user_input_features():
-    diabetes = st.sidebar.radio('Diabetes', 0, 1) 
+    diabetes = st.sidebar.dropdown('Diabetes', 0, 1) 
     blood_pressure_problems = st.sidebar.radio('Blood pressure problems', 0, 1) 
     any_transplants = st.sidebar.radio('Any transplants', 0, 1)
     any_chronic_diseases = st.sidebar.radio('Any chronic diseases', 0, 1) 
@@ -40,28 +52,75 @@ def user_input_features():
     features = pd.DataFrame(data, index=[0])
     return features
 
+
+# In[ ]:
+
+
 df = user_input_features()
+
+
+# In[ ]:
+
 
 st.subheader('User Input parameters')
 st.write(df)
+
+
+# In[ ]:
+
 
 premium = datasets.load_med_premium()
 X = med_premium_feat.data
 Y = med+premium.target
 
+
+# In[ ]:
+
+
 clf = RandomForestRegressor
 clf.fit(X,Y)
+
+
+# In[ ]:
+
 
 prediction = clf.predict(df)
 prediction_proba = clf.predict_proba(df)
 
-st.subheader('Class labels and their corresponding index number')
+
+# In[ ]:
+
+
+st,subheader('Class labels and their corresponding index number')
 st.write(med_premium.target_names)
+
+
+# In[ ]:
+
 
 st.subheader('Prediction')
 st.write(med_premium.target_names[prediction])
 #st.write(prediction)
 
+
+# In[ ]:
+
+
 st.subheader('Prediction Probability')
 st.write(prediction_proba)
 
+
+
+# In[ ]:
+
+
+st.subheader('Prediction')
+st.write(med_premium.target_names[prediction])
+#st.write(prediction)
+
+
+# In[ ]:
+
+
+st.subheader('Prediction Probability')
+st.write(prediction_proba)
