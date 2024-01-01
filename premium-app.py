@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn import datasets 
 
 # Use a locally available dataset for testing
-med_premium = Medicalpremium()
+med_premium = Medicalpremium.csv()
 X = med_premium.data
 y = med_premium.target
 
