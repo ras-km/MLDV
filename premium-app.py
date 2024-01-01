@@ -3,10 +3,10 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
 # Use a locally available dataset for testing
-from sklearn.datasets import load_diabetes
-insurance = load_diabetes()
-X = insurance.data
-y = insurance.target
+from sklearn.datasets import load_Medicalpremium
+insurance = load_Medicalpremium()
+X = Medicalpremium.data
+y = Medicalpremium.target
 
 # Split the dataset into training and testing sets
 from sklearn.model_selection import train_test_split
