@@ -4,9 +4,9 @@ from sklearn.ensemble import RandomForestRegressor
 
 # Use the correct dataset import
 from sklearn.datasets import fetch_openml
-insurance = fetch_openml(name='med_premium', version=1)
-X = med_premium.data
-y = med_premium.target
+insurance = fetch_openml(name='Medicalpremium', version=1)
+X = Medicalpremium.data
+y = Medicalpremium.target
 
 # Split the dataset into training and testing sets
 from sklearn.model_selection import train_test_split
