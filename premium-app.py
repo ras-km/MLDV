@@ -6,14 +6,14 @@ from sklearn.metrics import mean_absolute_error
 
 # Load your dataset (replace with your actual dataset)
 med_premium = pd.read_csv('Medicalpremium.csv')
-med_premium_feat = med_premium.drop(columns=['PremiumPrice'])
+target_variable = 'PremiumPrice'
+med_premium_feat = med_premium.drop(columns=[target_variable])
+# Extract features and target variable from med_premium
+X_train = med_premium.drop(columns=[target_variable])
+y_train = med_premium[target_variable]
 
-X_train = med_premium_feat
-y_train = med_premium['PremiumPrice']
-
-# Assuming the target variable is named 'target', adjust as needed
-X = med_premium_feat
-y = med_premium['PremiumPrice']
+# Extract features from premium_features (ensure it has the same columns as X_train)
+X_test = med_premium[X_train.columns]
 
 # Print basic information about the loaded dataset
 st.write("Loaded Dataset Information:")
