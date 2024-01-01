@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.datasets import Medicalpremium 
+from sklearn import datasets 
 
 # Use a locally available dataset for testing
 premium = Medicalpremium()
