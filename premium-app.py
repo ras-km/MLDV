@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.datasets import load_Medicampremium.csv  # Use a different dataset
+from sklearn.datasets import load_Medicampremium  # Use a different dataset
 
 # Load the Iris dataset
 iris = load_Medicampremium.csv()
