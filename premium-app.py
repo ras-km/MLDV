@@ -36,8 +36,12 @@ clf = RandomForestRegressor()
 clf.fit(X_train, y_train)
 
 # Save the trained model using joblib
-model_filename = "premium_model.pkl"
+model_filename = "random_forest_model.pkl"
 joblib.dump(clf, model_filename)
+
+# Save the scaler using joblib
+scaler_filename = 'scaler.joblib'
+joblib.dump(scaler, scaler_filename)
 
 # Streamlit app
 st.write("""
@@ -83,16 +87,17 @@ def user_input_features():
 # User input
 features = user_input_features()
 
-# Display user input
-st.subheader('User Input Parameters')
-st.write(features)
-
 # Load the trained model
 loaded_model = joblib.load(model_filename)
 
-# Make prediction using the loaded model
-prediction = loaded_model.predict(pd.DataFrame(features, index=[0]))
+# Load the scaler
+loaded_scaler = joblib.load(scaler_filename)
 
+# Preprocess input features (e.g., scale them)
+features_scaled = loaded_scaler.transform(features)
+
+# Make prediction using the loaded model
+prediction = loaded_model.predict(features_scaled)
 # Display prediction
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
