@@ -46,21 +46,21 @@ st.sidebar.header('User Input Parameters')
 
 def user_input_features():
     # Use radio buttons for yes/no selection
-    Diabetes = st.sidebar.radio('Diabetes', [0, 1])
-    BloodPressureProblems = st.sidebar.radio('Blood Pressure Problems', [0, 1])
-    AnyTransplants = st.sidebar.radio('Any Transplants', [0, 1])
-    AnyChronicDiseases = st.sidebar.radio('Any Chronic Diseases', [0, 1])
-    KnownAllergies = st.sidebar.radio('Known Allergies', [0, 1])
-    HistoryOfCancerInFfamily = st.sidebar.radio('History of Cancer in Family', [0, 1])
-    
-    # Use dropdown for age group selection
-    AgeGroup = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
-
-    # Use dropdown for major surgeries selection
-    MajorSurgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
+    diabetes = st.sidebar.radio('Diabetes', [0, 1])
+    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', [0, 1])
+    any_transplants = st.sidebar.radio('Any Transplants', [0, 1])
+    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', [0, 1])
+    known_allergies = st.sidebar.radio('Known Allergies', [0, 1])
+    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', [0, 1])
 
     # Use sliders for continuous features
-    BMI = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)  # Assuming BMI range is 0.0 to 100.0
+    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)  # Assuming BMI range is 0.0 to 100.0
+    
+    # Use dropdown for age group selection
+    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
+
+    # Use dropdown for major surgeries selection
+    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
     
     # Create a dictionary to hold user input
     features = {
