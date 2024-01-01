@@ -2,10 +2,14 @@ import streamlit as st
 import pandas as pd
 from sklearn import datasets
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 import joblib
 
 st.write("""
 This app predicts the premium for user after they input the required information""")
+
+med_premium=pd.read_csv('Medicalpremium.csv')
 
 target_variable = 'PremiumPrice'
 med_premium_feat = med_premium.drop(columns=[target_variable])
