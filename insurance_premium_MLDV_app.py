@@ -53,16 +53,16 @@ y_test_pred = rf_model.predict(X_test_scaled)
 def predict_premium(features):
     
     # Load the model
-    loaded_model  = joblib.load('random_forest_model.pkl')
+    rf_model  = joblib.load('random_forest_model.pkl')
     
     # Load the scaler
-    loaded_scaler = joblib.load('scaler.pkl')
+    scaler = joblib.load('scaler.pkl')
 
     # Preprocess input features (e.g., scale them)
-    features_scaled = loaded_scaler.transform(features)
+    features_scaled = scaler.transform(features)
 
     # Make predictions
-    predictions = loaded_model.predict(features_scaled)
+    predictions = rf_model.predict(features_scaled)
 
     return predictions
 
