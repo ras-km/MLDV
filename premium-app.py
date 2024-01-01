@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.datasets import load_Medicampremium.csv  # Use a different dataset
 
-# Use the correct dataset import
-from sklearn.datasets import fetch_openml
-insurance = fetch_openml(name='Medicalpremium', version=1)
-X = Medicalpremium.data
-y = Medicalpremium.target
+# Load the Iris dataset
+iris = load_Medicampremium.csv()
+X = Medicampremium.data
+y = Medicampremium.target
 
 # Split the dataset into training and testing sets
 from sklearn.model_selection import train_test_split
