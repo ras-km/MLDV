@@ -66,12 +66,12 @@ def user_input_features():
     
     # Create a dictionary to hold user input
     features = {
-        'Diabetes': 1 if diabetes == 'Yes' else 0,
-        'BloodPressureProblems': 1 if blood_pressure_problems == 'Yes' else 0,
-        'AnyTransplants': 1 if any_transplants == 'Yes' else 0,
-        'AnyChronicDiseases': 1 if any_chronic_diseases == 'Yes' else 0,
-        'KnownAllergies': 1 if known_allergies == 'Yes' else 0,
-        'HistoryOfCancerInFamily': 1 if history_of_cancer_in_family == 'Yes' else 0,
+        'Diabetes': diabetes,
+        'BloodPressureProblems': blood_pressure_problems,
+        'AnyTransplants': any_transplants,
+        'AnyChronicDiseases': any_chronic_diseases,
+        'KnownAllergies': known_allergies,
+        'HistoryOfCancerInFamily': history_of_cancer_in_family,
         'BMI': bmi,
         'AgeGroup': age_group,
         'MajorSurgeries': major_surgeries
