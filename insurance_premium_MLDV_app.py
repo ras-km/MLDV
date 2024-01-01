@@ -128,7 +128,7 @@ loaded_scaler = joblib.load('scaler.pkl')
 
 # Preprocess input features (e.g., scale them)
 features_array = [list(features.values())]
-features_scaled = loaded_scaler.transform(features)
+features_scaled = loaded_scaler.transform(features_array)
 
 # Make prediction using the loaded model
 prediction = loaded_model.predict(features_scaled)
