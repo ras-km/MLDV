@@ -87,10 +87,10 @@ def user_input_features():
 features = user_input_features()
 
 # Load the model
-    model = joblib.load('random_forest_model.pkl')
+model = joblib.load('random_forest_model.pkl')
     
-    # Load the scaler
-    scaler = joblib.load('scaler.pkl')
+# Load the scaler
+scaler = joblib.load('scaler.pkl')
 
 # Preprocess input features (e.g., scale them)
 features_scaled = loaded_scaler.transform(features)
