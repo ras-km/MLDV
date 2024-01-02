@@ -74,33 +74,26 @@ def user_input_features():
     return features
 
 
-# Load the model and scaler
+# Load the model
 with open('random_forest_model.pkl', 'rb') as model_file:
-    loaded_model = pickle.load(model_file)
+    model = pickle.load(model_file)
 
+# Load the scaler
 with open('scaler.pkl', 'rb') as scaler_file:
-    loaded_scaler = pickle.load(scaler_file)
+    scaler = pickle.load(scaler_file)
 
 # User input
 features = user_input_features()
 
-# Convert the input features to a NumPy array
-input_features_array = np.array([list(features.values())])
+# Preprocess input features (e.g., scale them)
+input_features_scaled = {key: scaler.transform([[value]])[0][0] for key, value in features.items()}
 
-# Scale the input features
-input_features_scaled = loaded_scaler.transform(input_features_array)
+# Convert the input features to a NumPy array
+input_features_array = np.array(list(input_features_scaled.values())).reshape(1, -1)
 
 # Make prediction using the loaded model
-prediction = loaded_model.predict(input_features_scaled)
+prediction = model.predict(input_features_array)
 
 # Display prediction
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
-# Optional: Display actual premium if available
-# st.write(f"The actual premium is: {actual_premium}")
-
-# Calculate and display mean absolute error (MAE)
-# actual_premium = y_test.iloc[0]  # Replace with actual premium value
-# mae = mean_absolute_error([actual_premium], [prediction[0]])
-# st.write(f"Mean Absolute Error (MAE): {mae}")
-
