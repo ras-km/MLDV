@@ -94,9 +94,9 @@ with open('scaler.pkl', 'rb') as scaler_file:
     scaler = pickle.load(scaler_file)
     
 # Preprocess input features (e.g., scale them)
-input_features_array = [list(features.values())]  # Convert feature values to a list
-features_scaled = scaler.transform(input_features_array)
-features_scaled = scaler.transform([list(features.values())])
+input_features_array = [list(features.values())]
+input_features_2d = scaler.transform(input_features_array)
+features_scaled = input_features_2d[0]  # Extract the scaled features from the 2D array
 
 # Make prediction using the loaded model
 prediction = model.predict(features_scaled)
