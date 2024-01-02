@@ -47,7 +47,6 @@ def user_input_features():
 user_features = user_input_features()
 
 # Load the model and scaler
-st.warning("Loading the model and scaler. This may take a moment...")
 ridge_model = joblib.load('ridge_model.joblib')
 scaler = joblib.load('scaler.joblib')
 
@@ -73,17 +72,9 @@ for col in missing_columns:
     user_features_encoded[col] = 0
 
 
-# Print user features before scaling
-st.write("User Features Before Scaling:")
-st.write(user_features_encoded)
-
 # Preprocess input features (e.g., scale them)
 input_features_scaled = scaler.transform(user_features_encoded.values[:, :14])
 
-
-# Print scaled features
-st.write("Input Features Scaled:")
-st.write(input_features_scaled)
 
 # Make prediction using the loaded model
 prediction = ridge_model.predict(input_features_scaled)
