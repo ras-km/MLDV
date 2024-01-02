@@ -49,7 +49,7 @@ user_features = user_input_features()
 # Load the model
 #with open('ridge_model.pkl', 'rb') as clf_file:
    # model = pickle.load(clf_file)
-clf = joblib.load('ridge_model.joblib')    
+ridge_model = joblib.load('ridge_model.joblib')    
 
 # Load the scaler
 #with open('scaler.pkl', 'rb') as scaler_file:
