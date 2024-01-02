@@ -10,7 +10,6 @@ import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 import pickle
 import joblib
-import cloudpickle
 
 st.write("""
 # Premium Prediction App
