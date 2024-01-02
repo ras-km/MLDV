@@ -7,17 +7,17 @@ from sklearn.preprocessing import StandardScaler
 import pickle
 
 # Load your dataset (replace with your actual dataset)
-#med_premium = pd.read_csv('Medicalpremium.csv')
-#target_variable = 'PremiumPrice'
-#med_premium_feat = med_premium.drop(columns=[target_variable])
+med_premium = pd.read_csv('Medicalpremium.csv')
+target_variable = 'PremiumPrice'
+med_premium_feat = med_premium.drop(columns=[target_variable])
 
 # Extract features and target variable from med_premium
-#X_train = med_premium_feat
-#y_train = med_premium[target_variable]
+X_train = med_premium_feat
+y_train = med_premium[target_variable]
 
 # Standardize features
-#scaler = StandardScaler()
-#X_train_scaled = scaler.fit_transform(X_train)
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
 
 # Create the RandomForestRegressor model
 clf = RandomForestRegressor()
