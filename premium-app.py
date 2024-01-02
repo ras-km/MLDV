@@ -36,13 +36,11 @@ clf = RandomForestRegressor()
 # Train the model
 clf.fit(X_train, y_train)
 
-# Save the trained model using joblib
+# Save the model
+joblib.dump(model, 'rf_model.pkl')
 
-joblib.dump(clf, "random_forest_model.pkl")
-
-# Save the scaler using joblib
-scaler_filename = 'scaler.joblib'
-joblib.dump(scaler, scaler_filename)
+# Save the scaler if you used one during preprocessing
+joblib.dump(scaler, 'scaler.pkl')
 
 # Streamlit app
 st.write("""
@@ -88,11 +86,11 @@ def user_input_features():
 # User input
 features = user_input_features()
 
-# Load the trained model
-loaded_model = joblib.load(model_filename)
-
-# Load the scaler
-loaded_scaler = joblib.load(scaler_filename)
+# Load the model
+    model = joblib.load('rf_model.pkl')
+    
+    # Load the scaler
+    scaler = joblib.load('scaler.pkl')
 
 # Preprocess input features (e.g., scale them)
 features_scaled = loaded_scaler.transform(features)
