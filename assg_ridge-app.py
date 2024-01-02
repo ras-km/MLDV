@@ -41,8 +41,8 @@ def user_input_features():
 user_features = user_input_features()
 
 # Load the model and scaler
-ridge_model = joblib.load('ridge_model.joblib')
-scaler = joblib.load('scaler.joblib')
+ridge_model = joblib.load('ridge_model.pkl')
+scaler = joblib.load('scaler.pkl')
 
 
 # Convert 'Age Group' to one-hot encoding
