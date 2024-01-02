@@ -59,12 +59,10 @@ expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants',
                     'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
                     'BMI', 'MajorSurgery_1','MajorSurgery_2','MajorSurgery_3', 'Age Group_31-40', 'Age Group_41-50', 
                     'Age Group_51-60', 'Age Group_61-70']
-for col in expected_columns:
-    if col not in user_features_encoded.columns:
-        user_features_encoded[col] = 0
+
 
 # Ensure all columns are present and in the correct order
-user_features_encoded = user_features_encoded[expected_columns]
+user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
 
 
 # Preprocess input features (e.g., scale them)
