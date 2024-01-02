@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error
-import joblib
+from sklearn.preprocessing import StandardScaler
+import pickle
 
 # Load your dataset (replace with your actual dataset)
 med_premium = pd.read_csv('Medicalpremium.csv')
@@ -18,29 +18,28 @@ X_test = med_premium_feat[X_train.columns]
 
 # Print basic information about the loaded dataset
 st.write("Loaded Dataset Information:")
-st.write(med_premium .info())
+st.write(med_premium.info())
 
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.3, random_state=7)
 
-# Print shapes of train and test sets
-st.write("Shapes after train-test split:")
-st.write("X_train shape:", X_train.shape)
-st.write("X_test shape:", X_test.shape)
-st.write("y_train shape:", y_train.shape)
-st.write("y_test shape:", y_test.shape)
+# Standardize features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
 
 # Create the RandomForestRegressor model
-model = RandomForestRegressor()
+clf = RandomForestRegressor()
 
 # Train the model
-model.fit(X_train, y_train)
+clf.fit(X_train_scaled, y_train)
 
 # Save the model
-#joblib.dump(model, 'random_forest_model.pkl')
+with open('random_forest_model.pkl', 'wb') as model_file:
+    pickle.dump(clf, model_file)
 
-# Save the scaler if you used one during preprocessing
-#joblib.dump(scaler, 'scaler.pkl')
+# Save the scaler
+with open('scaler.pkl', 'wb') as scaler_file:
+    pickle.dump(scaler, scaler_file)
 
 # Streamlit app
 st.write("""
@@ -87,11 +86,12 @@ def user_input_features():
 features = user_input_features()
 
 # Load the model
-model = joblib.load('random_forest_model.pkl')
-    
-# Load the scaler
-scaler = joblib.load('scaler.pkl')
+with open('random_forest_model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
 
+# Load the scaler
+with open('scaler.pkl', 'rb') as scaler_file:
+    scaler = pickle.load(scaler_file)
 # Preprocess input features (e.g., scale them)
 features_scaled = scaler.transform([list(features.values())])
 
