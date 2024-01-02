@@ -55,7 +55,11 @@ expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants',
                     'Age Group_51-60', 'Age Group_61-70']
 
 # Ensure all columns are present and in the correct order
-user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
+user_features_encoded = pd.DataFrame(0, columns=expected_columns, index=user_features_encoded.index)
+
+# Update the values in the DataFrame with the one-hot encoded features
+user_features_encoded.update(pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True))
+
 
 
 # Preprocess input features (e.g., scale them)
@@ -67,4 +71,3 @@ prediction = ridge_model.predict(input_features_scaled)
 
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
-
