@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 import pickle
+import joblib
 
 st.write("""
 # Premium Prediction App
@@ -47,11 +48,11 @@ user_features = user_input_features()
 
 # Load the model
 with open('random_forest_model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+    model = joblib.load(model_file)
 
 # Load the scaler
 with open('scaler.pkl', 'rb') as scaler_file:
-    scaler = pickle.load(scaler_file)
+    scaler = joblib.load(scaler_file)
 
 # Preprocess input features (e.g., scale them)
 input_features_scaled = scaler.transform(user_features)
