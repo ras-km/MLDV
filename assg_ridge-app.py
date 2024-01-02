@@ -1,14 +1,28 @@
-#!/usr/bin/env python
-# coding: utf-8
+import pandas as pd
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler
+import joblib
 
-# In[ ]:
+# Load your dataset
+# Assuming you have a dataset named 'premium_data.csv'
+data = pd.read_csv('premium_data.csv')
 
+# Preprocess your data and split into features (X) and target variable (y)
+
+# Initialize and fit the scaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Initialize and fit the Ridge model
+ridge_model = Ridge(alpha=1.0)
+ridge_model.fit(X_scaled, y)
+
+# Save the trained model and scaler
+joblib.dump(ridge_model, 'ridge_model.joblib')
+joblib.dump(scaler, 'scaler.joblib')
 
 import streamlit as st
 import pandas as pd
-import numpy as np
-from sklearn.linear_model import Ridge
-import pickle
 import joblib
 
 st.write("""
@@ -46,14 +60,8 @@ def user_input_features():
 
 user_features = user_input_features()
 
-# Load the model
-#with open('ridge_model.pkl', 'rb') as clf_file:
-   # model = pickle.load(clf_file)
+# Load the model and scaler
 ridge_model = joblib.load('ridge_model.joblib')    
-
-# Load the scaler
-#with open('scaler.pkl', 'rb') as scaler_file:
-   # scaler = pickle.load(scaler_file)
 scaler = joblib.load('scaler.joblib')
 
 # Preprocess input features (e.g., scale them)
@@ -64,4 +72,3 @@ prediction = ridge_model.predict(input_features_scaled)
 
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
-
