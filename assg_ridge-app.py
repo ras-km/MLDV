@@ -31,8 +31,8 @@ def user_input_features():
         'Known Allergies': 1 if known_allergies == 'Yes' else 0,
         'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
         'BMI': bmi,
-        'Age Group': age_group,
-        'Major Surgeries': major_surgeries
+        'Age Group': f'Age Group_{age_group}',
+        'Major Surgeries': f'MajorSurgery_{major_surgeries}'
     }
 
     features = pd.DataFrame(data, index=[0])
