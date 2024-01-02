@@ -92,7 +92,10 @@ with open('random_forest_model.pkl', 'rb') as model_file:
 # Load the scaler
 with open('scaler.pkl', 'rb') as scaler_file:
     scaler = pickle.load(scaler_file)
+    
 # Preprocess input features (e.g., scale them)
+input_features_array = [list(features.values())]  # Convert feature values to a list
+features_scaled = scaler.transform(input_features_array)
 features_scaled = scaler.transform([list(features.values())])
 
 # Make prediction using the loaded model
