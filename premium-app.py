@@ -73,11 +73,6 @@ def user_input_features():
     }
     return features
 
-# User input
-features = user_input_features()
-
-# Convert the input features to a NumPy array
-input_features_array = np.array([list(features.values())])
 
 # Load the model and scaler
 with open('random_forest_model.pkl', 'rb') as model_file:
@@ -85,6 +80,12 @@ with open('random_forest_model.pkl', 'rb') as model_file:
 
 with open('scaler.pkl', 'rb') as scaler_file:
     loaded_scaler = pickle.load(scaler_file)
+
+# User input
+features = user_input_features()
+
+# Convert the input features to a NumPy array
+input_features_array = np.array([list(features.values())])
 
 # Scale the input features
 input_features_scaled = loaded_scaler.transform(input_features_array)
