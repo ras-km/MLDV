@@ -49,7 +49,7 @@ user_features = user_input_features()
 # Load the model
 #with open('ridge_model.pkl', 'rb') as clf_file:
    # model = pickle.load(clf_file)
-clf = joblib.load('random_forest_model.joblib')    
+clf = joblib.load('ridge_model.joblib')    
 
 # Load the scaler
 #with open('scaler.pkl', 'rb') as scaler_file:
@@ -60,7 +60,7 @@ scaler = joblib.load('scaler.joblib')
 input_features_scaled = scaler.transform(user_features)
 
 # Make prediction using the loaded model
-prediction = clf.predict(input_features_scaled)
+prediction = ridge_model.predict(input_features_scaled)
 
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
