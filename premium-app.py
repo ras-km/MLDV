@@ -26,11 +26,11 @@ clf = RandomForestRegressor()
 clf.fit(X_train_scaled, y_train)
 
 # Save the model and scaler
-#with open('random_forest_model.pkl', 'wb') as model_file:
-    #pickle.dump(clf, model_file)
+with open('random_forest_model.pkl', 'wb') as model_file:
+    pickle.dump(clf, model_file)
 
-#with open('scaler.pkl', 'wb') as scaler_file:
-    #pickle.dump(scaler, scaler_file)
+with open('scaler.pkl', 'wb') as scaler_file:
+    pickle.dump(scaler, scaler_file)
 
 # Streamlit app
 st.write("""
