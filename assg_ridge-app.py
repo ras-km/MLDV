@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -65,11 +59,6 @@ for col in expected_columns:
 
 # Ensure all columns are present and in the correct order
 user_features_encoded = user_features_encoded[expected_columns]
-
-# Add missing columns and fill with zeros
-missing_columns = set(expected_columns) - set(user_features_encoded.columns)
-for col in missing_columns:
-    user_features_encoded[col] = 0
 
 
 # Preprocess input features (e.g., scale them)
