@@ -61,10 +61,8 @@ user_features_encoded = pd.DataFrame(0, columns=expected_columns, index=user_fea
 user_features_encoded.update(pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True))
 
 
-
 # Preprocess input features (e.g., scale them)
-input_features_scaled = scaler.transform(user_features_encoded.values[:, :14])
-
+input_features_scaled = scaler.transform(user_features_encoded.values)
 
 # Make prediction using the loaded model
 prediction = ridge_model.predict(input_features_scaled)
