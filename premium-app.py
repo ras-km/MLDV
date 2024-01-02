@@ -37,10 +37,10 @@ model = RandomForestRegressor()
 model.fit(X_train, y_train)
 
 # Save the model
-joblib.dump(model, 'random_forest_model.pkl')
+#joblib.dump(model, 'random_forest_model.pkl')
 
 # Save the scaler if you used one during preprocessing
-joblib.dump(scaler, 'scaler.pkl')
+#joblib.dump(scaler, 'scaler.pkl')
 
 # Streamlit app
 st.write("""
