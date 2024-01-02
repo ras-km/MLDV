@@ -31,10 +31,10 @@ st.write("y_train shape:", y_train.shape)
 st.write("y_test shape:", y_test.shape)
 
 # Create the RandomForestRegressor model
-clf = RandomForestRegressor()
+model = RandomForestRegressor()
 
 # Train the model
-clf.fit(X_train, y_train)
+model.fit(X_train, y_train)
 
 # Save the model
 joblib.dump(model, 'random_forest_model.pkl')
@@ -93,10 +93,10 @@ model = joblib.load('random_forest_model.pkl')
 scaler = joblib.load('scaler.pkl')
 
 # Preprocess input features (e.g., scale them)
-features_scaled = loaded_scaler.transform(features)
+features_scaled = scaler.transform([list(features.values())])
 
 # Make prediction using the loaded model
-prediction = loaded_model.predict(features_scaled)
+prediction = model.predict(features_scaled)
 # Display prediction
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
