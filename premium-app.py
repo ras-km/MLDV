@@ -95,9 +95,15 @@ with open('scaler.pkl', 'rb') as scaler_file:
     
 # Preprocess input features (e.g., scale them)
 input_features_array = [list(features.values())]
+# Convert the input features to a NumPy array
+input_features_array = np.array(input_features_array)
 
 # Add print statements for debugging
 print(f"input_features_array: {input_features_array}, type: {type(input_features_array)}")
+# Reshape the input features array if needed
+if len(input_features_array.shape) == 1:
+    input_features_array = input_features_array.reshape(1, -1)
+    
 input_features_2d = scaler.transform(input_features_array)
 print(f"input_features_2d: {input_features_2d}, type: {type(input_features_2d)}")
 features_scaled = input_features_2d[0]  # Extract the scaled features from the 2D array
