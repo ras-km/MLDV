@@ -20,10 +20,10 @@ import pickle
 #X_train_scaled = scaler.fit_transform(X_train)
 
 # Create the RandomForestRegressor model
-#clf = RandomForestRegressor()
+clf = RandomForestRegressor()
 
 # Train the model
-#clf.fit(X_train_scaled, y_train)
+clf.fit(X_train_scaled, y_train)
 
 # Save the model and scaler
 #with open('random_forest_model.pkl', 'wb') as model_file:
