@@ -46,12 +46,14 @@ def user_input_features():
 user_features = user_input_features()
 
 # Load the model
-with open('ridge_model.pkl', 'rb') as clf_file:
-    model = pickle.load(clf_file)
+#with open('ridge_model.pkl', 'rb') as clf_file:
+   # model = pickle.load(clf_file)
+clf = joblib.load('random_forest_model.joblib')    
 
 # Load the scaler
-with open('scaler.pkl', 'rb') as scaler_file:
-    scaler = pickle.load(scaler_file)
+#with open('scaler.pkl', 'rb') as scaler_file:
+   # scaler = pickle.load(scaler_file)
+scaler = joblib.load('scaler.joblib')
 
 # Preprocess input features (e.g., scale them)
 input_features_scaled = scaler.transform(user_features)
