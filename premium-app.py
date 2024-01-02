@@ -87,8 +87,8 @@ def user_input_features():
 features = user_input_features()
 
 # Load the model
-with open('random_forest_model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+with open('random_forest_model.pkl', 'rb') as clf_file:
+    model = pickle.load(clf_file)
 
 # Load the scaler
 with open('scaler.pkl', 'rb') as scaler_file:
@@ -98,24 +98,11 @@ with open('scaler.pkl', 'rb') as scaler_file:
 input_features_scaled = {key: scaler.transform([[value]])[0][0] for key, value in features.items()}
 
 # Convert the input features to a NumPy array
-input_features_array = np.array(input_features_array)
-
-# Add print statements for debugging
-print(f"input_features_array: {input_features_array}, type: {type(input_features_array)}")
-# Reshape the input features array if needed
-if len(input_features_array.shape) == 1:
-    input_features_array = input_features_array.reshape(1, -1)
+input_features_array = np.array(list(input_features_scaled.values())).reshape(1, -1)
     
-input_features_2d = scaler.transform(input_features_array)
-print(f"input_features_2d: {input_features_2d}, type: {type(input_features_2d)}")
-features_scaled = input_features_2d[0]  # Extract the scaled features from the 2D array
-print(f"features_scaled: {features_scaled}, type: {type(features_scaled)}")
-
 # Make prediction using the loaded model
-input_features_2d = scaler.transform(input_features_array)
-features_scaled = input_features_2d[0]  # Extract the scaled features from the 2D array
+prediction = clf.predict(input_features_array)
 
-prediction = model.predict([list(input_features_scaled.values())])
 # Display prediction
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
