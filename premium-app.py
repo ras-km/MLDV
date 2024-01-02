@@ -37,7 +37,7 @@ clf = RandomForestRegressor()
 clf.fit(X_train, y_train)
 
 # Save the model
-joblib.dump(model, 'rf_model.pkl')
+joblib.dump(model, 'random_forest_model.pkl')
 
 # Save the scaler if you used one during preprocessing
 joblib.dump(scaler, 'scaler.pkl')
@@ -87,7 +87,7 @@ def user_input_features():
 features = user_input_features()
 
 # Load the model
-    model = joblib.load('rf_model.pkl')
+    model = joblib.load('random_forest_model.pkl')
     
     # Load the scaler
     scaler = joblib.load('scaler.pkl')
