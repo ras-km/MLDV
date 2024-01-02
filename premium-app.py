@@ -10,19 +10,10 @@ import pickle
 med_premium = pd.read_csv('Medicalpremium.csv')
 target_variable = 'PremiumPrice'
 med_premium_feat = med_premium.drop(columns=[target_variable])
+
 # Extract features and target variable from med_premium
 X_train = med_premium_feat
 y_train = med_premium[target_variable]
-
-# Extract features from premium_features (ensure it has the same columns as X_train)
-X_test = med_premium_feat[X_train.columns]
-
-# Print basic information about the loaded dataset
-st.write("Loaded Dataset Information:")
-st.write(med_premium.info())
-
-# Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.3, random_state=7)
 
 # Standardize features
 scaler = StandardScaler()
@@ -34,11 +25,10 @@ clf = RandomForestRegressor()
 # Train the model
 clf.fit(X_train_scaled, y_train)
 
-# Save the model
+# Save the model and scaler
 with open('random_forest_model.pkl', 'wb') as model_file:
     pickle.dump(clf, model_file)
 
-# Save the scaler
 with open('scaler.pkl', 'wb') as scaler_file:
     pickle.dump(scaler, scaler_file)
 
@@ -86,27 +76,25 @@ def user_input_features():
 # User input
 features = user_input_features()
 
-# Load the model
-with open('random_forest_model.pkl', 'rb') as clf_file:
-    model = pickle.load(clf_file)
-
-# Load the scaler
-with open('scaler.pkl', 'rb') as scaler_file:
-    scaler = pickle.load(scaler_file)
-    
 # Preprocess input features (e.g., scale them)
-input_features_scaled = {key: scaler.transform([[value]])[0][0] for key, value in features.items()}
+input_features_array = np.array(list(features.values())).reshape(1, -1)
 
-# Convert the input features to a NumPy array
-input_features_array = np.array(list(input_features_scaled.values())).reshape(1, -1)
-    
+# Load the model and scaler
+with open('random_forest_model.pkl', 'rb') as model_file:
+    loaded_model = pickle.load(model_file)
+
+with open('scaler.pkl', 'rb') as scaler_file:
+    loaded_scaler = pickle.load(scaler_file)
+
+# Scale the input features
+input_features_scaled = loaded_scaler.transform(input_features_array)
+
 # Make prediction using the loaded model
-prediction = clf.predict(input_features_array)
+prediction = loaded_model.predict(input_features_scaled)
 
 # Display prediction
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
-
 # Optional: Display actual premium if available
 # st.write(f"The actual premium is: {actual_premium}")
 
