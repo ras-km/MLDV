@@ -46,8 +46,8 @@ def user_input_features():
 user_features = user_input_features()
 
 # Load the model
-with open('ridge_model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+with open('ridge_model.pkl', 'rb') as clf_file:
+    model = pickle.load(clf_file)
 
 # Load the scaler
 with open('scaler.pkl', 'rb') as scaler_file:
@@ -57,7 +57,7 @@ with open('scaler.pkl', 'rb') as scaler_file:
 input_features_scaled = scaler.transform(user_features)
 
 # Make prediction using the loaded model
-prediction = model.predict(input_features_scaled)
+prediction = clf.predict(input_features_scaled)
 
 st.subheader('Prediction')
 st.write(f"The predicted premium is: {prediction[0]}")
