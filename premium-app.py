@@ -76,8 +76,8 @@ def user_input_features():
 # User input
 features = user_input_features()
 
-# Preprocess input features (e.g., scale them)
-input_features_array = np.array(list(features.values())).reshape(1, -1)
+# Convert the input features to a NumPy array
+input_features_array = np.array([list(features.values())])
 
 # Load the model and scaler
 with open('random_forest_model.pkl', 'rb') as model_file:
