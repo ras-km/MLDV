@@ -98,6 +98,13 @@ input_features_array = [list(features.values())]
 input_features_2d = scaler.transform(input_features_array)
 features_scaled = input_features_2d[0]  # Extract the scaled features from the 2D array
 
+# Add print statements for debugging
+print(f"input_features_array: {input_features_array}, type: {type(input_features_array)}")
+input_features_2d = scaler.transform(input_features_array)
+print(f"input_features_2d: {input_features_2d}, type: {type(input_features_2d)}")
+features_scaled = input_features_2d[0]  # Extract the scaled features from the 2D array
+print(f"features_scaled: {features_scaled}, type: {type(features_scaled)}")
+
 # Make prediction using the loaded model
 prediction = model.predict(features_scaled)
 # Display prediction
