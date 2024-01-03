@@ -10,7 +10,7 @@ st.write("""
 This app predicts the premium based on user input.
 """)
 
-st.sidebar.header('User Input Parameters')
+st.sidebar.header('Please fill in these information so that we can serve you better')
 
 def user_input_features():
     diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'], help='Select either Yes or No')
