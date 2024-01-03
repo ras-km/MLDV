@@ -5,11 +5,11 @@ from sklearn.linear_model import Ridge
 import pickle
 import joblib
 
-st.title("""
-# Insurance Premium Prediction App
+st.title(Insurance Premium Prediction App)
 
-This app predicts the insurance premium based on user input.
-""")
+
+st.header(This app predicts the insurance premium based on user input)
+
 
 st.image('medical_insurance4.jpeg')
 
