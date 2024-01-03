@@ -6,7 +6,7 @@ import pickle
 import joblib
 
 st.write("""
-#Insurance Premium Prediction App
+# Insurance Premium Prediction App
 
 
 
