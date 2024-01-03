@@ -5,8 +5,8 @@ from sklearn.linear_model import Ridge
 import pickle
 import joblib
 
-st.write("""
-# Insurance Premium Prediction App
+st.title("""
+ Insurance Premium Prediction App
 
 
 
