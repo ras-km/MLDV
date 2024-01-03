@@ -78,5 +78,5 @@ input_features_scaled = scaler.transform(user_features_encoded.values)
 # Make prediction using the loaded model
 prediction = ridge_model.predict(input_features_scaled)
 
-st.subheader('Prediction')
-st.write(f"The predicted premium is: {prediction[0]}")
+st.write('Prediction')
+st.subheader(f"The predicted premium is: {prediction[0]}")
