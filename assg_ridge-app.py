@@ -6,8 +6,11 @@ import pickle
 import joblib
 
 st.write("""
-# Premium Prediction App
-This app predicts the premium based on user input.
+#Insurance Premium Prediction App
+
+
+
+This app predicts the insurance premium based on user input.
 """)
 
 st.sidebar.header('Please fill in these information so that we can serve you better')
@@ -20,8 +23,8 @@ def user_input_features():
     known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'], help='Select either Yes or No')
     history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'], help='Select either Yes or No')
     bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0, help='Use slider to select your BMI')
-    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Choose your age group')
-    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3], help='How many major surgeries have you had before')
+    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
+    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
     data = {
         'Diabetes': 1 if diabetes == 'Yes' else 0,
