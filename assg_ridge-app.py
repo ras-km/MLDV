@@ -32,7 +32,7 @@ def user_input_features():
         'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
         'BMI': bmi,
         'Age Group': f'Age Group_{age_group}',
-        'Major Surgeries': f'MajorSurgery_{major_surgeries}'
+        'Major Surgeries': f'Major Surgeries_{major_surgeries}'  # Update column name here
     }
 
     features = pd.DataFrame(data, index=[0])
@@ -44,22 +44,21 @@ user_features = user_input_features()
 ridge_model = joblib.load('ridge_model.pkl')
 scaler = joblib.load('scaler.pkl')
 
-
-# Convert 'Age Group' to one-hot encoding
+# Convert 'Age Group' and 'Major Surgeries' to one-hot encoding
 user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
 
-# Ensure the categorical columns are present and fill with zeros if not
-expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
-                    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
-                    'BMI', 'MajorSurgery_1','MajorSurgery_2','MajorSurgery_3', 'Age Group_31-40', 'Age Group_41-50', 
-                    'Age Group_51-60', 'Age Group_61-70']
-
+# Ensure all columns are present and in the correct order
+expected_columns = [
+    'Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
+    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
+    'BMI', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3',
+    'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70'
+]
 
 user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
 
 # Preprocess input features (e.g., scale them)
 input_features_scaled = scaler.transform(user_features_encoded.values)
-
 
 # Make prediction using the loaded model
 prediction = ridge_model.predict(input_features_scaled)
