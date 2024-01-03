@@ -13,7 +13,7 @@ This app predicts the premium based on user input.
 st.sidebar.header('User Input Parameters')
 
 def user_input_features():
-    diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'])
+    diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'], help='Select either Yes or No')
     blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'])
     any_transplants = st.sidebar.radio('Any Transplants', ['No', 'Yes'])
     any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'])
