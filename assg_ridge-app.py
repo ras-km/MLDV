@@ -8,7 +8,7 @@ import joblib
 st.title("""
  Insurance Premium Prediction App
 
-
+st.image('medical_insurance4.jpeg')
 
 This app predicts the insurance premium based on user input.
 """)
