@@ -14,7 +14,7 @@ st.header(This app predicts the insurance premium based on user input)
 st.image('medical_insurance4.jpeg')
 
 
-st.sidebar.header('Please fill in these information so that we can serve you better')
+st.sidebar.header('Please fill in these information for us to serve you better')
 
 def user_input_features():
     diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'], help='Select either Yes or No')
