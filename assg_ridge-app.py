@@ -32,7 +32,7 @@ def user_input_features():
         'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
         'BMI': bmi,
         'Age Group': f'Age Group_{age_group}',
-        'Major Surgeries': f'Major Surgeries_{major_surgeries}'  # Update column name here
+        'Major Surgeries': f'MajorSurgery_{major_surgeries}'
     }
 
     features = pd.DataFrame(data, index=[0])
@@ -44,16 +44,27 @@ user_features = user_input_features()
 ridge_model = joblib.load('ridge_model.pkl')
 scaler = joblib.load('scaler.pkl')
 
-# Convert 'Age Group' and 'Major Surgeries' to one-hot encoding
-user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
+# Convert 'Age Group' and 'Major Surgeries' to one-hot encoding manually
+age_group_column = f'Age Group_{user_features["Age Group"].values[0]}'
+major_surgeries_column = f'MajorSurgery_{user_features["Major Surgeries"].values[0]}'
+
+# Create a DataFrame with one-hot encoded columns
+user_features_encoded = pd.DataFrame(0, columns=['Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70',
+                                                 'MajorSurgery_1', 'MajorSurgery_2', 'MajorSurgery_3'],
+                                     index=user_features.index)
+
+# Update the values in the DataFrame with the one-hot encoded features
+user_features_encoded[age_group_column] = 1
+user_features_encoded[major_surgeries_column] = 1
+
+# Concatenate with the original DataFrame
+user_features_encoded = pd.concat([user_features, user_features_encoded], axis=1)
 
 # Ensure all columns are present and in the correct order
-expected_columns = [
-    'Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
-    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
-    'BMI', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3',
-    'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70'
-]
+expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
+                    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
+                    'BMI', 'MajorSurgery_1', 'MajorSurgery_2', 'MajorSurgery_3',
+                    'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70']
 
 user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
 
