@@ -14,14 +14,14 @@ st.sidebar.header('User Input Parameters')
 
 def user_input_features():
     diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'], help='Select either Yes or No')
-    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'])
-    any_transplants = st.sidebar.radio('Any Transplants', ['No', 'Yes'])
-    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'])
-    known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'])
-    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'])
-    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)
-    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
-    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
+    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'], help='Select either Yes or No')
+    any_transplants = st.sidebar.radio('Any Transplants', ['No', 'Yes'], help='Select either Yes or No')
+    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'], help='Select either Yes or No')
+    known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'], help='Select either Yes or No')
+    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'], help='Select either Yes or No')
+    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0, help='Slide to your BMI')
+    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select either Yes or No')
+    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3], help='Select either Yes or No')
 
     data = {
         'Diabetes': 1 if diabetes == 'Yes' else 0,
