@@ -6,7 +6,7 @@ import pickle
 import joblib
 
 st.title("""
- Insurance Premium Prediction App
+# Insurance Premium Prediction App
 
 This app predicts the insurance premium based on user input.
 """)
