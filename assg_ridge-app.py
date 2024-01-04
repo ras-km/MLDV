@@ -79,9 +79,15 @@ input_features_scaled = scaler.transform(user_features_encoded.values)
 # Make prediction using the loaded model
 prediction = ridge_model.predict(input_features_scaled)
 
-with st.container():
+# Round the prediction to 2 decimal places
+rounded_prediction = round(prediction[0], 2)
+
+# Create a container
+prediction_container = st.container()
+
+with prediction_container:
     st.header('Prediction')
-    st.subheader(f"The predicted premium is: ${prediction[0]}")
+    st.subheader(f"The predicted premium is: ${rounded_prediction}")
 
 with st.container():
     st.write("---")
