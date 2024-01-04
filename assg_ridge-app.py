@@ -82,3 +82,15 @@ prediction = ridge_model.predict(input_features_scaled)
 with st.container():
     st.haeder('Prediction')
     st.subheader(f"The predicted premium is: {prediction[0]}")
+
+with st.container():
+    st.write("---")
+    st.write("Leave your name and email and we will send you a quotation")
+    st.write("##")
+
+    quotation_form = """
+    <form action="https://formsubmit.co/your@email.com" method="POST">
+        <input type="text" name="name" required>
+        <input type="email" name="email required>
+        <button type="submit">Send</button>
+    </form>
