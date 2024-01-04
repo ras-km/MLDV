@@ -8,7 +8,7 @@ import joblib
 
 with st.container():
     st.title('Insurance Premium Prediction App')
-    st.header('This app predicts the health insurance premium based on user information input')
+    st.subheader('This app predicts the health insurance premium based on user information input')
     st.write('##')
 
 
