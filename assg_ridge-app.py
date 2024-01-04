@@ -91,13 +91,15 @@ with prediction_container:
 
 with st.container():
     st.write("---")
-    st.write("Leave your name and email and we will send you a quotation")
+    st.write("Leave your name and email, and we will send you a quotation")
     st.write("##")
 
     contact_form = """
     <form action="https://formsubmit.co/your@email.com" method="POST">
         <input type="text" name="name" required>
-        <input type="email" name="email required>
+        <input type="email" name="email" required>
         <button type="submit">Send</button>
     </form>
     """
+
+    st.markdown(contact_form, unsafe_allow_html=True)
