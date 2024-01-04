@@ -12,7 +12,7 @@ with st.container():
     st.write('##')
 
 
-st.image('medical_insurance4.jpeg', width=400, height=300)
+st.image('medical_insurance4.jpeg', width=200, height=150)
 
 
 st.sidebar.header('Please fill in these information for us to serve you better')
