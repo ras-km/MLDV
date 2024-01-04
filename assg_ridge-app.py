@@ -81,7 +81,7 @@ prediction = ridge_model.predict(input_features_scaled)
 
 with st.container():
     st.header('Prediction')
-    st.subheader(f"The predicted premium is: {prediction[0]}")
+    st.subheader(f"The predicted premium is: ${prediction[0]}")
 
 with st.container():
     st.write("---")
