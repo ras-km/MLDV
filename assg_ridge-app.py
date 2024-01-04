@@ -8,7 +8,7 @@ import joblib
 
 with st.container():
     st.title('Insurance Premium Prediction App')
-    st.subheader('This app predicts the health insurance premium based on user information input')
+    st.write('This app predicts the health insurance premium based on user information input')
     st.write('##')
 
 
@@ -80,5 +80,5 @@ input_features_scaled = scaler.transform(user_features_encoded.values)
 prediction = ridge_model.predict(input_features_scaled)
 
 with st.container():
-    st.write('Prediction')
+    st.haeder('Prediction')
     st.subheader(f"The predicted premium is: {prediction[0]}")
