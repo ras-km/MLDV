@@ -6,7 +6,7 @@ import pickle
 import joblib
 
 
-woth st.container():
+with st.container():
     st.title('Insurance Premium Prediction App')
     st.header('This app predicts the health insurance premium based on user information input')
     st.write('##')
