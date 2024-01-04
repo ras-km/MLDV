@@ -103,3 +103,4 @@ with st.container():
     """
 
     st.markdown(contact_form, unsafe_allow_html=True)
+    st.components.v1.html(contact_form)
