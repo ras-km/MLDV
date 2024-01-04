@@ -94,3 +94,4 @@ with st.container():
         <input type="email" name="email required>
         <button type="submit">Send</button>
     </form>
+    """
