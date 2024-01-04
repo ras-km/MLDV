@@ -5,10 +5,11 @@ from sklearn.linear_model import Ridge
 import pickle
 import joblib
 
-st.title('Insurance Premium Prediction App')
 
-
-st.header('This app predicts the insurance premium based on user input')
+woth st.container():
+    st.title('Insurance Premium Prediction App')
+    st.header('This app predicts the health insurance premium based on user information input')
+    st.write('##')
 
 
 st.image('medical_insurance4.jpeg')
@@ -78,5 +79,6 @@ input_features_scaled = scaler.transform(user_features_encoded.values)
 # Make prediction using the loaded model
 prediction = ridge_model.predict(input_features_scaled)
 
-st.write('Prediction')
-st.subheader(f"The predicted premium is: {prediction[0]}")
+with st.container():
+    st.write('Prediction')
+    st.subheader(f"The predicted premium is: {prediction[0]}")
