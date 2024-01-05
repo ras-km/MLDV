@@ -1,4 +1,4 @@
-import streamlit as st
+derimport streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import Ridge
@@ -91,7 +91,7 @@ with prediction_container:
 
 with st.form("quotation_form"):
     st.write("---")
-    st.write("Leave your name and email, and we will send you a quotation")
+    st.subheader("Leave your name and email, and we will send you a quotation")
     st.write("##")
 
     name = st.text_input("Name", key="name")
