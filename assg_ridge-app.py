@@ -97,7 +97,7 @@ with st.form("quotation_form"):
     name = st.text_input("Name", key="name")
     email = st.text_input("Email", key="email")
 
-    submit_button = st.form_submit_button("Submit")
+    submit_button = st.form_submit_button("Send quotation")
 
 # Process the form data after submission
 if submit_button:
