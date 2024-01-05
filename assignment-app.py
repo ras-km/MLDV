@@ -16,7 +16,7 @@ def get_user_input():
     known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'])
     history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'])
     bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)
-    age_group = st.sidebar.selectbox('Select Age Group', [ '31-40', '41-50', '51-60', '61-70'])
+    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
     # Create a DataFrame with the processed features
