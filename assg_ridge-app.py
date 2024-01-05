@@ -91,10 +91,12 @@ with prediction_container:
 
 with st.container():
     st.write("---")
-    st.write("Leave your name and email, and we will send you a quotation")
+    
     st.write("##")
 
-contact_form = """
+with st.form():
+    st.write("Leave your name and email, and we will send you a quotation")
+    contact_form = """
     <form action="https://formsubmit.co/your@email.com" method="POST">
         <input type="text" name="name" required>
         <input type="email" name="email" required>
