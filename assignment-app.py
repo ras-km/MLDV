@@ -58,26 +58,26 @@ def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
     known_allergies = 1 if known_allergies == 'Yes' else 0
     history_of_cancer_in_family = 1 if history_of_cancer_in_family == 'Yes' else 0
 
-    # Create a dictionary with the processed features
-    user_features = {
+    # Create a DataFrame with the processed features
+    user_features = pd.DataFrame({
         'Diabetes': diabetes,
-        'BloodPressureProblems': blood_pressure_problems,
-        'AnyTransplants': any_transplants,
-        'AnyChronicDiseases': any_chronic_diseases,
-        'KnownAllergies': known_allergies,
-        'HistoryOfCancerInFamily': history_of_cancer_in_family,
+        'Blood Pressure Problems': blood_pressure_problems,
+        'Any Transplants': any_transplants,
+        'Any Chronic Diseases': any_chronic_diseases,
+        'Known Allergies': known_allergies,
+        'History Of Cancer In Family': history_of_cancer_in_family,
         'BMI': bmi,
-        'MajorSurgery_1': major_surgery_1,
-        'MajorSurgery_2': major_surgery_2,
-        'MajorSurgery_3': major_surgery_3,
-        'Age_31_40': age_31_40,
-        'Age_41_50': age_41_50,
-        'Age_51_60': age_51_60,
-        'Age_61_70': age_61_70
-    }
+        'Major Surgery 1': major_surgery_1,
+        'Major Surgery 2': major_surgery_2,
+        'Major Surgery 3': major_surgery_3,
+        'Age Group 31-40': age_31_40,
+        'Age Group 41-50': age_41_50,
+        'Age Group 51-60': age_51_60,
+        'Age Group 61-70': age_61_70
+    }, index=[0])
 
     return user_features
-
+                               
 # Ensure the categorical columns are present and fill with zeros if not
 expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
                     'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
@@ -88,11 +88,11 @@ expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants',
 st.sidebar.header('User Input Parameters')
 
 try:
-    # Ensure all columns are present and in the correct order
-    user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
+    # Get user input
+    user_features = get_user_input()
 
     # Preprocess input features (e.g., scale them)
-    input_features_scaled = scaler.transform(user_features_encoded.values)
+    input_features_scaled = scaler.transform(user_features.values)
 
 
     # Prediction
