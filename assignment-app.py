@@ -31,7 +31,8 @@ def get_user_input():
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
-    data = {
+    # Create a DataFrame with the processed features
+    user_features = pd.DataFrame({
         'Diabetes': 1 if diabetes == 'Yes' else 0,
         'Blood Pressure Problems': 1 if blood_pressure_problems == 'Yes' else 0,
         'Any Transplants': 1 if any_transplants == 'Yes' else 0,
@@ -39,13 +40,17 @@ def get_user_input():
         'Known Allergies': 1 if known_allergies == 'Yes' else 0,
         'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
         'BMI': bmi,
-        'Age Group': f'Age Group_{age_group}',
-        'Major Surgeries': f'MajorSurgery_{major_surgeries}'
-    }
+        'Age Group_31-40': 1 if age_group == '31-40' else 0,
+        'Age Group_41-50': 1 if age_group == '41-50' else 0,
+        'Age Group_51-60': 1 if age_group == '51-60' else 0,
+        'Age Group_61-70': 1 if age_group == '61-70' else 0,
+        'Major Surgeries_1': 1 if major_surgeries == 1 else 0,
+        'Major Surgeries_2': 1 if major_surgeries == 2 else 0,
+        'Major Surgeries_3': 1 if major_surgeries == 3 else 0,
+    }, index=[0])
 
-    features = pd.DataFrame(data, index=[0])
-    return features
-
+    return user_features
+    
 def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
                            any_chronic_diseases, known_allergies, history_of_cancer_in_family,
                            bmi, major_surgery_1, major_surgery_2, major_surgery_3,
