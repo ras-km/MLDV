@@ -74,16 +74,26 @@ def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
     }
 
     return user_features
+
+# Ensure the categorical columns are present and fill with zeros if not
+expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
+                    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
+                    'BMI', 'MajorSurgery_1', 'MajorSurgery_2', 'MajorSurgery_3', 
+                    'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70']
                                
 # Sidebar for user input
 st.sidebar.header('User Input Parameters')
 
 try:
-    # Get user input
-    user_features = get_user_input()
+    # Ensure all columns are present and in the correct order
+    user_features = user_features.reindex(columns=expected_columns, fill_value=0)
+
+    # Preprocess input features (e.g., scale them)
+    input_features_scaled = scaler.transform(user_features.values)
+
 
     # Prediction
-    predicted_price = predict_premium(user_features)
+    predicted_price = predict_premium(input_features_scaled)
 
     # Display result
     st.subheader('Prediction')
