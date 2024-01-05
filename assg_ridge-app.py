@@ -89,16 +89,19 @@ with prediction_container:
     st.header('Prediction')
     st.subheader(f"The predicted premium is: ${rounded_prediction}")
 
-with st.container():
+with st.form("quotation_form"):
     st.write("---")
-    
+    st.write("Leave your name and email, and we will send you a quotation")
     st.write("##")
 
-with st.form("quotation_form"):
-   st.write("Input name and email address and we will send you a quotation")
-   name = st.name_input('Name', "Your Name")
-   email = st.email_input('Email')
-   st.form_submit_button('Send me quotation')
+    name = st.text_input("Name", key="name")
+    email = st.text_input("Email", key="email")
 
-    st.markdown(contact_form, unsafe_allow_html=True)
-    st.components.v1.html(contact_form)
+    submit_button = st.form_submit_button("Submit")
+
+# Process the form data after submission
+if submit_button:
+    # Perform actions with the collected data (name and email)
+    st.write(f"Name: {name}")
+    st.write(f"Email: {email}")
+    # Add your form submission logic here
