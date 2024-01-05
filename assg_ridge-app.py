@@ -17,6 +17,11 @@ st.image('medical_insurance4.jpeg')
 
 st.sidebar.header('Please fill in these information for us to serve you better')
 
+# Load the model and scaler
+ridge_model = joblib.load('ridge_model.pkl')
+scaler = joblib.load('scaler.pkl')
+
+
 def user_input_features():
     diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'], help='Select either Yes or No')
     blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'], help='Select either Yes or No')
@@ -44,10 +49,6 @@ def user_input_features():
     return features
 
 user_features = user_input_features()
-
-# Load the model and scaler
-ridge_model = joblib.load('ridge_model.pkl')
-scaler = joblib.load('scaler.pkl')
 
 # Convert 'Age Group' and 'Major Surgeries' to one-hot encoding manually
 age_group_column = f'Age Group_{user_features["Age Group"].values[0]}'
