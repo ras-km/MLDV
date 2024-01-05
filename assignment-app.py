@@ -56,11 +56,26 @@ user_features = get_user_input()
 # Preprocess input features (e.g., scale them)
 try:
     # Manually encode categorical features
-    user_features['Age Group_18-30'] = 0  # Add a dummy column for Age Group_18-30
-    user_features['Major Surgeries_0'] = 0  # Add a dummy column for Major Surgeries_0
+    age_group_column = f'Age Group_{user_features["Age Group"].values[0]}'
+    major_surgeries_column = f'Major Surgeries_{user_features["Major Surgeries"].values[0]}'
+
+    user_features_encoded = pd.DataFrame(0, columns=['Age Group_18-30', 'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70',
+                                                     'Major Surgeries_0', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3'],
+                                         index=[0])
+
+    user_features_encoded[age_group_column] = 1
+    user_features_encoded[major_surgeries_column] = 1
+
+    # Ensure all columns are present and in the correct order
+    expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
+                        'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
+                        'BMI', 'Major Surgeries_0', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3',
+                        'Age Group_18-30', 'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70']
+
+    user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
 
     # Prediction
-    predicted_price = model.predict(scaler.transform(user_features.values))
+    predicted_price = model.predict(scaler.transform(user_features_encoded.values))
 
     # Display result
     st.subheader('Prediction')
