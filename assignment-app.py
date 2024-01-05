@@ -16,7 +16,7 @@ def get_user_input():
     known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'])
     history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'])
     bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)
-    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
+    age_group = st.sidebar.selectbox('Select Age Group', ['18_30', '31_40', '41_50', '51_60', '61_70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
     # Create a DataFrame with the processed features
@@ -28,10 +28,10 @@ def get_user_input():
         'Known Allergies': 1 if known_allergies == 'Yes' else 0,
         'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
         'BMI': bmi,
-        'Age Group_31-40': 1 if age_group == '31-40' else 0,
-        'Age Group_41-50': 1 if age_group == '41-50' else 0,
-        'Age Group_51-60': 1 if age_group == '51-60' else 0,
-        'Age Group_61-70': 1 if age_group == '61-70' else 0,
+        'Age Group_31_40': 1 if age_group == '31_40' else 0,
+        'Age Group_41_50': 1 if age_group == '41_50' else 0,
+        'Age Group_51_60': 1 if age_group == '51_60' else 0,
+        'Age Group_61_70': 1 if age_group == '61_70' else 0,
         'Major Surgeries_1': 1 if major_surgeries == 1 else 0,
         'Major Surgeries_2': 1 if major_surgeries == 2 else 0,
         'Major Surgeries_3': 1 if major_surgeries == 3 else 0,
