@@ -29,12 +29,15 @@ def get_user_input():
     any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'])
     known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'])
     history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'])
-    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)
+    bmi = st.sidebar.slider('BMI', 0.0, 50.0, 25.0)
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
+
+    # Convert 'Age Group' to one-hot encoding
+    age_group_encoded = pd.get_dummies(pd.Series([f'Age Group_{age_group}']), prefix='Age Group').iloc[:, 1:]
     
     # Convert 'Age Group' to one-hot encoding
-    user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
+    #user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
     
 
     # Create a DataFrame with the processed features
@@ -112,7 +115,6 @@ try:
 
     # Preprocess input features (e.g., scale them)
     input_features_scaled = scaler.transform(user_features.values)
-
 
     # Prediction
     predicted_price = predict_premium(input_features_scaled)
