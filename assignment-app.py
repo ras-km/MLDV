@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+import joblib
 
 # Your prediction function
 def predict_premium(features):
