@@ -86,7 +86,7 @@ st.sidebar.header('User Input Parameters')
 
 try:
     # Ensure all columns are present and in the correct order
-    user_features = user_features.reindex(columns=expected_columns, fill_value=0)
+    user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
 
     # Preprocess input features (e.g., scale them)
     input_features_scaled = scaler.transform(user_features.values)
