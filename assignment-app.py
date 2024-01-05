@@ -78,12 +78,15 @@ def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
 # Sidebar for user input
 st.sidebar.header('User Input Parameters')
 
-# Get user input
-user_features = get_user_input()
+try:
+    # Get user input
+    user_features = get_user_input()
 
-# Prediction
-predicted_price = predict_premium(user_features)
+    # Prediction
+    predicted_price = predict_premium(user_features)
 
-# Display result
-st.subheader('Prediction')
-st.write("The premium is estimated to be ${:,.2f}".format(predicted_price))
+    # Display result
+    st.subheader('Prediction')
+    st.write("The premium is estimated to be ${:,.2f}".format(predicted_price))
+except Exception as e:
+    st.error(f"An error occurred: {e}")
