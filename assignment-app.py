@@ -37,24 +37,11 @@ def get_user_input():
 # Sidebar for user input
 st.sidebar.header('User Input Parameters')
 
-# Manually encode categorical features (Age Group and Major Surgeries)
-age_group_encoded = pd.get_dummies(user_features['Age Group'], prefix='Age Group')
-major_surgeries_encoded = pd.get_dummies(user_features['Major Surgeries'], prefix='Major Surgeries')
+# Get user input
+user_features = get_user_input()
 
-# Concatenate the one-hot encoded features to the DataFrame
-user_features_encoded = pd.concat([user_features, age_group_encoded, major_surgeries_encoded], axis=1)
-
-# Drop the original 'Age Group' and 'Major Surgeries' columns
-user_features_encoded = user_features_encoded.drop(['Age Group', 'Major Surgeries'], axis=1)
-
-# Ensure all columns are present and in the correct order
-expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
-                    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
-                    'BMI', 'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70',
-                    'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3']
-
-user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
-
+# Manually encode categorical features
+user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
 
 # Ensure all columns are present and in the correct order
 expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
