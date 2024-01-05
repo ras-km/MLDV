@@ -31,7 +31,8 @@ def get_user_input():
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
-    age_group_encoded = pd.get_dummies(pd.Series([age_group]), prefix='Age Group').iloc[:, 1:]
+    # Convert 'Age Group' to one-hot encoding
+    age_group_encoded = pd.get_dummies(pd.Series([f'Age Group_{age_group}']), prefix='Age Group').iloc[:, 1:]
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
@@ -87,12 +88,17 @@ def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
     }, index=[0])
 
     return user_features
+
+# Convert 'Age Group' to one-hot encoding
+user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
                                
 # Ensure the categorical columns are present and fill with zeros if not
 expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
                     'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
                     'BMI', 'MajorSurgery_1', 'MajorSurgery_2', 'MajorSurgery_3', 
                     'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70']
+
+user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
                                
 # Sidebar for user input
 st.sidebar.header('User Input Parameters')
