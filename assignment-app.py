@@ -28,7 +28,6 @@ def get_user_input():
         'Known Allergies': 1 if known_allergies == 'Yes' else 0,
         'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
         'BMI': bmi,
-        #'Age Group_18-30': 1 if age_group == '18-30' else 0,
         'Age Group_31-40': 1 if age_group == '31-40' else 0,
         'Age Group_41-50': 1 if age_group == '41-50' else 0,
         'Age Group_51-60': 1 if age_group == '51-60' else 0,
