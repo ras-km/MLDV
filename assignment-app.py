@@ -3,16 +3,14 @@ import pandas as pd
 import numpy as np
 import joblib
 
-
 # Load the model
-    model = joblib.load('ridge_model.pkl')
-    
-    # Load the scaler
-    scaler = joblib.load('scaler.pkl')
+model = joblib.load('ridge_model.pkl')
+
+# Load the scaler
+scaler = joblib.load('scaler.pkl')
 
 # Your prediction function
 def predict_premium(features):
-
     # Preprocess input features (e.g., scale them)
     features_scaled = scaler.transform(features)
 
@@ -29,16 +27,12 @@ def get_user_input():
     any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'])
     known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'])
     history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'])
-    bmi = st.sidebar.slider('BMI', 0.0, 50.0, 25.0)
+    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
     # Convert 'Age Group' to one-hot encoding
     age_group_encoded = pd.get_dummies(pd.Series([f'Age Group_{age_group}']), prefix='Age Group').iloc[:, 1:]
-    
-    # Convert 'Age Group' to one-hot encoding
-    #user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
-    
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
@@ -95,9 +89,6 @@ def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
 
     return user_features
 
-# Convert 'Age Group' to one-hot encoding
-user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
-                               
 # Ensure the categorical columns are present and fill with zeros if not
 expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
                     'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
