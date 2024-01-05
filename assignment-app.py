@@ -19,17 +19,30 @@ def get_user_input():
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
+    # Encode categorical features manually
+    diabetes_encoded = 1 if diabetes == 'Yes' else 0
+    blood_pressure_problems_encoded = 1 if blood_pressure_problems == 'Yes' else 0
+    any_transplants_encoded = 1 if any_transplants == 'Yes' else 0
+    any_chronic_diseases_encoded = 1 if any_chronic_diseases == 'Yes' else 0
+    known_allergies_encoded = 1 if known_allergies == 'Yes' else 0
+    history_of_cancer_in_family_encoded = 1 if history_of_cancer_in_family == 'Yes' else 0
+
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
-        'Diabetes': 1 if diabetes == 'Yes' else 0,
-        'Blood Pressure Problems': 1 if blood_pressure_problems == 'Yes' else 0,
-        'Any Transplants': 1 if any_transplants == 'Yes' else 0,
-        'Any Chronic Diseases': 1 if any_chronic_diseases == 'Yes' else 0,
-        'Known Allergies': 1 if known_allergies == 'Yes' else 0,
-        'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
+        'Diabetes': diabetes_encoded,
+        'Blood Pressure Problems': blood_pressure_problems_encoded,
+        'Any Transplants': any_transplants_encoded,
+        'Any Chronic Diseases': any_chronic_diseases_encoded,
+        'Known Allergies': known_allergies_encoded,
+        'History Of Cancer In Family': history_of_cancer_in_family_encoded,
         'BMI': bmi,
-        'Age Group': age_group,
-        'Major Surgeries': f'Major Surgeries_{major_surgeries}'
+        'Age Group_31-40': 1 if age_group == '31-40' else 0,
+        'Age Group_41-50': 1 if age_group == '41-50' else 0,
+        'Age Group_51-60': 1 if age_group == '51-60' else 0,
+        'Age Group_61-70': 1 if age_group == '61-70' else 0,
+        'Major Surgeries_1': 1 if major_surgeries == 1 else 0,
+        'Major Surgeries_2': 1 if major_surgeries == 2 else 0,
+        'Major Surgeries_3': 1 if major_surgeries == 3 else 0,
     }, index=[0])
 
     return user_features
@@ -40,23 +53,34 @@ st.sidebar.header('User Input Parameters')
 # Get user input
 user_features = get_user_input()
 
-# Manually encode categorical features
-user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
-
-# Ensure all columns are present and in the correct order
-expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
-                    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
-                    'BMI', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3', 
-                    'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70']
-
-user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
-
 # Preprocess input features (e.g., scale them)
-input_features_scaled = scaler.transform(user_features_encoded.values)
+try:
+    # Manually encode categorical features
+    age_group_column = f'Age Group_{user_features["Age Group"].values[0]}'
+    major_surgeries_column = f'Major Surgeries_{user_features["Major Surgeries"].values[0]}'
 
-# Prediction
-predicted_price = model.predict(input_features_scaled)
+    user_features_encoded = pd.DataFrame(0, columns=['Age Group_18-30', 'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70',
+                                                     'Major Surgeries_0', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3'],
+                                         index=[0])
 
-# Display result
-st.subheader('Prediction')
-st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
+    user_features_encoded[age_group_column] = 1
+    user_features_encoded[major_surgeries_column] = 1
+
+    # Ensure all columns are present and in the correct order
+    expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
+                        'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
+                        'BMI', 'Major Surgeries_0', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3',
+                        'Age Group_18-30', 'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70']
+
+    user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
+
+    # Prediction
+    predicted_price = model.predict(scaler.transform(user_features_encoded.values))
+
+    # Display result
+    st.subheader('Prediction')
+    st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
+except Exception as e:
+    st.error(f"An error occurred during prediction: {e}")
+    st.write("User Features:")
+    st.write(user_features)
