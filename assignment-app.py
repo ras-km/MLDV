@@ -43,17 +43,26 @@ def get_user_input():
 st.sidebar.header('User Input Parameters')
 
 
-# Get user input
-user_features = get_user_input()
+try:
+    # Get user input
+    user_features = get_user_input()
 
-# Preprocess input features (e.g., scale them)
-input_features_scaled = scaler.transform(user_features.values)
+    # Display user input for verification
+    st.write("User Input:")
+    st.write(user_features)
 
-# Prediction
-predicted_price = model.predict(input_features_scaled)
+    # Preprocess input features (e.g., scale them)
+    input_features_scaled = scaler.transform(user_features.values)
 
-# Display result
-st.subheader('Prediction')
-st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
-#except Exception as e:
-    #st.error(f"An error occurred: {e}")
+    # Display scaled features for verification
+    st.write("Scaled Features:")
+    st.write(input_features_scaled)
+
+    # Prediction
+    predicted_price = model.predict(input_features_scaled)
+
+    # Display result
+    st.subheader('Prediction')
+    st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
+except Exception as e:
+    st.error(f"An error occurred: {e}")
