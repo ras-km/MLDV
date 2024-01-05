@@ -33,6 +33,9 @@ def get_user_input():
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
     
+    # Convert 'Age Group' to one-hot encoding
+    user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
+    
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
@@ -56,9 +59,6 @@ def get_user_input():
     user_features = pd.concat([user_features, age_group_encoded], axis=1)
 
     return user_features
-
-# Convert 'Age Group' to one-hot encoding
-user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
     
 def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
                            any_chronic_diseases, known_allergies, history_of_cancer_in_family,
@@ -91,6 +91,9 @@ def preprocess_user_input(diabetes, blood_pressure_problems, any_transplants,
     }, index=[0])
 
     return user_features
+
+# Convert 'Age Group' to one-hot encoding
+user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
                                
 # Ensure the categorical columns are present and fill with zeros if not
 expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
