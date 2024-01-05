@@ -94,15 +94,11 @@ with st.container():
     
     st.write("##")
 
-with st.form():
-    st.write("Leave your name and email, and we will send you a quotation")
-    contact_form = """
-    <form action="https://formsubmit.co/your@email.com" method="POST">
-        <input type="text" name="name" required>
-        <input type="email" name="email" required>
-        <button type="submit">Send</button>
-    </form>
-    """
+with st.form("quotation_form"):
+   st.write("Input name and email address and we will send you a quotation")
+   name = st.name_input('Name', "Your Name")
+   email = st.email_input('Email')
+   st.form_submit_button('Send me quotation')
 
     st.markdown(contact_form, unsafe_allow_html=True)
     st.components.v1.html(contact_form)
