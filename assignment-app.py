@@ -28,13 +28,8 @@ def get_user_input():
         'Known Allergies': 1 if known_allergies == 'Yes' else 0,
         'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
         'BMI': bmi,
-        'Age Group_31-40': 1 if age_group == '31-40' else 0,
-        'Age Group_41-50': 1 if age_group == '41-50' else 0,
-        'Age Group_51-60': 1 if age_group == '51-60' else 0,
-        'Age Group_61-70': 1 if age_group == '61-70' else 0,
-        'Major Surgeries_1': 1 if major_surgeries == 1 else 0,
-        'Major Surgeries_2': 1 if major_surgeries == 2 else 0,
-        'Major Surgeries_3': 1 if major_surgeries == 3 else 0,
+        'Age Group': age_group,
+        'Major Surgeries': f'Major Surgeries_{major_surgeries}'
     }, index=[0])
 
     return user_features
@@ -42,27 +37,26 @@ def get_user_input():
 # Sidebar for user input
 st.sidebar.header('User Input Parameters')
 
+# Get user input
+user_features = get_user_input()
 
-try:
-    # Get user input
-    user_features = get_user_input()
+# Manually encode categorical features
+user_features_encoded = pd.get_dummies(user_features, columns=['Age Group', 'Major Surgeries'], drop_first=True)
 
-    # Display user input for verification
-    st.write("User Input:")
-    st.write(user_features)
+# Ensure all columns are present and in the correct order
+expected_columns = ['Diabetes', 'Blood Pressure Problems', 'Any Transplants', 
+                    'Any Chronic Diseases', 'Known Allergies', 'History Of Cancer In Family', 
+                    'BMI', 'Major Surgeries_1', 'Major Surgeries_2', 'Major Surgeries_3', 
+                    'Age Group_31-40', 'Age Group_41-50', 'Age Group_51-60', 'Age Group_61-70']
 
-    # Preprocess input features (e.g., scale them)
-    input_features_scaled = scaler.transform(user_features.values)
+user_features_encoded = user_features_encoded.reindex(columns=expected_columns, fill_value=0)
 
-    # Display scaled features for verification
-    st.write("Scaled Features:")
-    st.write(input_features_scaled)
+# Preprocess input features (e.g., scale them)
+input_features_scaled = scaler.transform(user_features_encoded.values)
 
-    # Prediction
-    predicted_price = model.predict(input_features_scaled)
+# Prediction
+predicted_price = model.predict(input_features_scaled)
 
-    # Display result
-    st.subheader('Prediction')
-    st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
-except Exception as e:
-    st.error(f"An error occurred: {e}")
+# Display result
+st.subheader('Prediction')
+st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
