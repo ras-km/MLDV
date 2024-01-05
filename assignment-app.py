@@ -31,6 +31,8 @@ def get_user_input():
     age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
     major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
 
+    age_group_encoded = pd.get_dummies(pd.Series([age_group]), prefix='Age Group').iloc[:, 1:]
+
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
         'Diabetes': 1 if diabetes == 'Yes' else 0,
@@ -48,6 +50,9 @@ def get_user_input():
         'Major Surgeries_2': 1 if major_surgeries == 2 else 0,
         'Major Surgeries_3': 1 if major_surgeries == 3 else 0,
     }, index=[0])
+
+    # Concatenate the one-hot encoded 'Age Group' to the DataFrame
+    user_features = pd.concat([user_features, age_group_encoded], axis=1)
 
     return user_features
     
