@@ -8,7 +8,7 @@ with st.container():
     st.write('This app predicts the health insurance premium based on user information input')
     st.write('##')
 
-    st.image('medical_insurance4.jpeg')
+st.image('medical_insurance4.jpeg')
 
 st.sidebar.header('Please fill in these information for us to serve you better')
 
@@ -64,5 +64,25 @@ predicted_price = model.predict(input_features_scaled)
 # Display result
 st.subheader('Prediction')
 st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
+
+with prediction_container:
+    st.header('Prediction')
+    st.subheader(f"The predicted premium is: ${rounded_prediction}")
+
+with st.form("quotation_form"):
+    st.write("---")
+    st.subheader("Leave your name and email, and we will send you a quotation")
+    st.write("##")
+
+    name = st.text_input("Name", key="name")
+    email = st.text_input("Email", key="email")
+
+    submit_button = st.form_submit_button("Send quotation")
+
+# Process the form data after submission
+if submit_button:
+    # Perform actions with the collected data (name and email)
+    st.write(f"Name: {name}")
+    st.write(f"Email: {email}")
 #except Exception as e:
     #st.error(f"An error occurred: {e}")
