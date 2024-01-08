@@ -10,7 +10,7 @@ with st.container():
 
     st.image('medical_insurance4.jpeg')
 
-    st.sidebar.header('Please fill in these information for us to serve you better')
+st.sidebar.header('Please fill in these information for us to serve you better')
 
 # Load the model and scaler
 model = joblib.load('ridge_model.pkl')
