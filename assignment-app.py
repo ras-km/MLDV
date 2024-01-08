@@ -72,7 +72,7 @@ with columns[0]:
     st.header('Prediction')
 
 with columns[1]:
-    st.subheader(f"The predicted premium is: ${rounded_prediction}")
+    st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}")
 
 with st.form("quotation_form"):
     st.write("---")
