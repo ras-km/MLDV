@@ -68,9 +68,9 @@ st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
 
 columns = st.columns(1)
 
-with columns:
+with columns[0]:
     st.header('Prediction')
-    st.write(f"The predicted premium is: ${rounded_prediction}")
+    st.subheader(f"The predicted premium is: ${rounded_prediction}")
 
 with st.form("quotation_form"):
     st.write("---")
