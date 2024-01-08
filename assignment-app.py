@@ -66,11 +66,12 @@ predicted_price = model.predict(input_features_scaled)
 st.subheader('Prediction')
 st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
 
-columns = st.columns(1)
-rounded_prediction = round(predicted_price, 2)
+columns = st.columns(2)  # Use the number of columns you want
 
 with columns[0]:
     st.header('Prediction')
+
+with columns[1]:
     st.subheader(f"The predicted premium is: ${rounded_prediction}")
 
 with st.form("quotation_form"):
