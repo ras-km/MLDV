@@ -68,11 +68,11 @@ st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
 
 with prediction_container:
     st.header('Prediction')
-    st.subheader(f"The predicted premium is: ${rounded_prediction}")
+    st.write(f"The predicted premium is: ${rounded_prediction}")
 
 with st.form("quotation_form"):
     st.write("---")
-    st.subheader("Leave your name and email, and we will send you a quotation")
+    st.write("Leave your name and email, and we will send you a quotation")
     st.write("##")
 
     name = st.text_input("Name", key="name")
