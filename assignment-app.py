@@ -8,7 +8,7 @@ with st.container():
     st.write('This app predicts the health insurance premium based on user information input')
     st.write('##')
 
-image_path = "images/medical_insurance.jpeg"
+image_path = "images/medical_insurance4.jpeg"
 image = st.image(image_path, caption="Your Image Caption", use_column_width=True)
 
 st.sidebar.header('Please fill in these information for us to serve you better')
