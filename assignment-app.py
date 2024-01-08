@@ -3,8 +3,6 @@ import pandas as pd
 import numpy as np
 import joblib
 
-st.__file__
-
 with st.container():
     st.title('Insurance Premium Prediction App')
     st.write('This app predicts the health insurance premium based on user information input')
