@@ -66,7 +66,7 @@ predicted_price = model.predict(input_features_scaled)
 st.subheader('Prediction')
 st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
 
-with st.container:
+with st.container():
     st.header('Prediction')
     st.write(f"The predicted premium is: ${rounded_prediction}")
 
