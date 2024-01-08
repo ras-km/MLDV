@@ -63,8 +63,8 @@ input_features_scaled = scaler.transform(user_features.values)
 predicted_price = model.predict(input_features_scaled)
 
 # Display result
-st.subheader('Prediction')
-st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
+#st.subheader('Prediction')
+#st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
 
 columns = st.columns(2)  # Use the number of columns you want
 
