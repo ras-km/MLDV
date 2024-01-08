@@ -3,6 +3,15 @@ import pandas as pd
 import numpy as np
 import joblib
 
+with st.container():
+    st.title('Insurance Premium Prediction App')
+    st.write('This app predicts the health insurance premium based on user information input')
+    st.write('##')
+
+    st.image('medical_insurance4.jpeg')
+
+    st.sidebar.header('Please fill in these information for us to serve you better')
+
 # Load the model and scaler
 model = joblib.load('ridge_model.pkl')
 scaler = joblib.load('scaler.pkl')
