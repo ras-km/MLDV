@@ -67,6 +67,7 @@ st.subheader('Prediction')
 st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
 
 columns = st.columns(1)
+rounded_prediction = round(predicted_price, 2)
 
 with columns[0]:
     st.header('Prediction')
