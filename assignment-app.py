@@ -76,7 +76,7 @@ with columns[1]:
 
 with st.form("quotation_form"):
     st.write("---")
-    st.write("Leave your name and email, and we will send you a quotation")
+    st.write("Leave your name and email, and we will send you a :red[quotation]")
     st.write("##")
 
     name = st.text_input("Name", key="name")
