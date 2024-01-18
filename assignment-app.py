@@ -19,15 +19,15 @@ scaler = joblib.load('scaler.pkl')
 
 # Function to get user input
 def get_user_input():
-    diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'])
-    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'])
-    any_transplants = st.sidebar.radio('Any Transplants', ['No', 'Yes'])
-    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'])
-    known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'])
-    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'])
-    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0)
-    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'])
-    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3])
+    diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'], help='Select either Yes or No')
+    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'], help='Select either Yes or No')
+    any_transplants = st.sidebar.radio('Any Transplants', ['No', 'Yes'], help='Select either Yes or No')
+    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'], help='Select either Yes or No')
+    known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'], help='Select either Yes or No')
+    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'], help='Select either Yes or No')
+    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0, help='Use slider to select your BMI')
+    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select your age group')
+    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3], help='How many times have you had mojor surgeries before?')
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
