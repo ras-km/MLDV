@@ -9,7 +9,7 @@ with st.container():
     st.write('##')
 
 image_path = "images/medical_insurance3.jpeg"
-image = st.image(image_path, caption="Your Image Caption", use_column_width=True)
+image = st.image(image_path, use_column_width=True)
 
 st.sidebar.header('Please fill in these information for an estimate of your premium')
 
@@ -19,24 +19,24 @@ scaler = joblib.load('scaler.pkl')
 
 # Function to get user input
 def get_user_input():
-    diabetes = st.sidebar.radio('Diabetes', ['No', 'Yes'], help='Select either Yes or No')
-    blood_pressure_problems = st.sidebar.radio('Blood Pressure Problems', ['No', 'Yes'], help='Select either Yes or No')
-    any_transplants = st.sidebar.radio('Any Transplants', ['No', 'Yes'], help='Select either Yes or No')
-    any_chronic_diseases = st.sidebar.radio('Any Chronic Diseases', ['No', 'Yes'], help='Select either Yes or No')
-    known_allergies = st.sidebar.radio('Known Allergies', ['No', 'Yes'], help='Select either Yes or No')
-    history_of_cancer_in_family = st.sidebar.radio('History of Cancer in Family', ['No', 'Yes'], help='Select either Yes or No')
-    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0, help='Use slider to select your BMI')
-    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select your age group')
-    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3], help='How many times have you had major surgeries before?')
+    diabetes = st.sidebar.checkbox('Diabetes', value=False, help=':orange[Select if you have Diabetes]')
+    blood_pressure_problems = st.sidebar.checkbox('Blood Pressure Problems', value=False, help=':orange[Select if you have Blood Pressure Problems]')
+    any_transplants = st.sidebar.checkbox('Any Transplants', value=False, help=':orange[Select if you have any Transplants]')
+    any_chronic_diseases = st.sidebar.checkbox('Any Chronic Diseases', value=False, help=':orange[Select if you have any Chronic Diseases]')
+    known_allergies = st.sidebar.checkbox('Known Allergies', value=False, help=':orange[Select if you have Known Allergies]')
+    history_of_cancer_in_family = st.sidebar.checkbox('History of Cancer in Family', value=False, help=':orange[Select if there is a History of Cancer in Family]')
+    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0, help=':orange[Use slider to select your BMI]')
+    age_group = st.sidebar.selectbox('Select Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help=':orange[Select your age group]')
+    major_surgeries = st.sidebar.selectbox('Number of Major Surgeries', [0, 1, 2, 3], help=':orange[How many times have you had major surgeries before?]')
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
-        'Diabetes': 1 if diabetes == 'Yes' else 0,
-        'Blood Pressure Problems': 1 if blood_pressure_problems == 'Yes' else 0,
-        'Any Transplants': 1 if any_transplants == 'Yes' else 0,
-        'Any Chronic Diseases': 1 if any_chronic_diseases == 'Yes' else 0,
-        'Known Allergies': 1 if known_allergies == 'Yes' else 0,
-        'History Of Cancer In Family': 1 if history_of_cancer_in_family == 'Yes' else 0,
+        'Diabetes': 1 if diabetes else 0,
+        'Blood Pressure Problems': 1 if blood_pressure_problems else 0,
+        'Any Transplants': 1 if any_transplants else 0,
+        'Any Chronic Diseases': 1 if any_chronic_diseases else 0,
+        'Known Allergies': 1 if known_allergies else 0,
+        'History Of Cancer In Family': 1 if history_of_cancer_in_family else 0,
         'BMI': bmi,
         'Age Group_31-40': 1 if age_group == '31-40' else 0,
         'Age Group_41-50': 1 if age_group == '41-50' else 0,
@@ -49,10 +49,6 @@ def get_user_input():
 
     return user_features
 
-# Sidebar for user input
-st.sidebar.header('User Input Parameters')
-
-
 # Get user input
 user_features = get_user_input()
 
@@ -62,21 +58,17 @@ input_features_scaled = scaler.transform(user_features.values)
 # Prediction
 predicted_price = model.predict(input_features_scaled)
 
-# Display result
-#st.subheader('Prediction')
-#st.write("The premium is estimated to be ${:,.2f}".format(predicted_price[0]))
-
 columns = st.columns(2)  # Use the number of columns you want
 
 with columns[0]:
-    st.header('Prediction')
+    st.header(':rainbow[Prediction]')
 
 with columns[1]:
-    st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}")
+    st.subheader(f"The predicted premium is: :orange[${predicted_price[0]:,.2f}]")
 
 with st.form("quotation_form"):
     st.write("---")
-    st.write("Leave your name and email, and we will send you a :red[quotation]")
+    st.write("Leave your name and email, and we will send you a :red[quotation]:e-mail:")
     st.write("##")
 
     name = st.text_input("Name", key="name")
@@ -89,5 +81,3 @@ if submit_button:
     # Perform actions with the collected data (name and email)
     st.write(f"Name: {name}")
     st.write(f"Email: {email}")
-#except Exception as e:
-    #st.error(f"An error occurred: {e}")
