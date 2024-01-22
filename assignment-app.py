@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 
 with st.container():
-    st.title('Insurance Premium Prediction App')
+    st.title(':rainbow[Insurance Premium Prediction App]')
     st.write('This app predicts the health insurance premium based on user information input')
     st.write('##')
 
@@ -58,26 +58,22 @@ input_features_scaled = scaler.transform(user_features.values)
 # Prediction
 predicted_price = model.predict(input_features_scaled)
 
-columns = st.columns(2)  # Use the number of columns you want
+columns = st.columns(1)  # Use the number of columns you want
 
 with columns[0]:
-    st.header(':rainbow[Prediction]')
-
-with columns[1]:
     st.subheader(f"The predicted premium is: :orange[${predicted_price[0]:,.2f}]")
 
 with st.form("quotation_form"):
     st.write("---")
-    st.write("Leave your name and email, and we will send you a :red[quotation]:e-mail:")
+    st.write("Leave your name and email, and we will send you a :red[quotation]")
     st.write("##")
 
-    name = st.text_input("Name", key="name")
-    email = st.text_input("Email", key="email")
+    name = st.text_input("Name", key="name", placeholder="Enter Name")
+    email = st.text_input("Email", key="email", placeholder="someone@somewhere.com")
 
-    submit_button = st.form_submit_button("Send quotation")
+    submit_button = st.form_submit_button(":orange[Send quotation]:e-mail:")
 
 # Process the form data after submission
 if submit_button:
     # Perform actions with the collected data (name and email)
-    st.write(f"Name: {name}")
-    st.write(f"Email: {email}")
+    st.write(f"Thank you, :orange[{name}]! A quotation has been sent to {email}")
