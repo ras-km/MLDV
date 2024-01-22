@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 import time
 
-with st.container(border=True):
+with st.container():
     st.header(':rainbow[Insurance Premium Prediction]', divider='rainbow')
     st.write(':orange[This app predicts the health insurance premium based on user information input]')
     st.write('##')
