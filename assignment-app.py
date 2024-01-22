@@ -9,7 +9,7 @@ with st.container(border=True):
     st.write(':orange[This app predicts the health insurance premium based on user information input]')
     st.write('##')
 
-image_path = "images/medical_insurance5.jpeg"
+image_path = "images/medical_insurance5.jpg"
 image = st.image(image_path, use_column_width=True)
 
 with st.container(border=True):
