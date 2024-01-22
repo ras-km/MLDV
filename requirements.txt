@@ -1,4 +1,4 @@
-streamlit==1.2.0
+streamlit==1.2.9
 pandas==2.1.1
 matplotlib==3.7.2
 numpy==1.26.0
