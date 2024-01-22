@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 
 with st.container():
-    st.title(':rainbow[Insurance Premium Prediction App]')
+    st.title(':rainbow[Insurance Premium Prediction]')
     st.write('This app predicts the health insurance premium based on user information input')
     st.write('##')
 
