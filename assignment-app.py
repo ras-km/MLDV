@@ -6,7 +6,7 @@ import time
 
 st.set_page_config(
 	layout="centered",  # Can be "centered" or "wide". In the future also "dashboard", etc.
-	initial_sidebar_state="expanded",  # Can be "auto", "expanded", "collapsed"
+	initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
 	page_title="Premium Prediction",  # String or None. Strings get appended with "• Streamlit". 
 	page_icon="images/medical_insurance5.jpg",  # String, anything supported by st.image, or None.
 )
@@ -14,6 +14,7 @@ st.set_page_config(
 with st.container(border=True):
     st.header(':rainbow[Insurance Premium Prediction]', divider='rainbow')
     st.write(':orange[This app predicts the health insurance premium based on user information input]')
+    st.write('Please expand the sidebar on the top left arrow!')
     st.write('##')
 
 image_path = "images/medical_insurance5.jpg"
