@@ -5,7 +5,7 @@ import joblib
 import time
 
 st.set_page_config(
-	layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
+	layout="centered",  # Can be "centered" or "wide". In the future also "dashboard", etc.
 	initial_sidebar_state="expanded",  # Can be "auto", "expanded", "collapsed"
 	page_title="Premium Prediction",  # String or None. Strings get appended with "• Streamlit". 
 	page_icon="images/medical_insurance5.jpg",  # String, anything supported by st.image, or None.
