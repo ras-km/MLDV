@@ -21,7 +21,7 @@ image_path = "images/medical_insurance5.jpg"
 image = st.image(image_path, use_column_width=True)
 
 with st.container():
-    st.sidebar.header(':orange[Please fill in these information for an estimate of your premium]', divider='rainbow')
+    st.header(':orange[Please fill in these information for an estimate of your premium]', divider='rainbow')
 
 # Load the model and scaler
 model = joblib.load('ridge_model.pkl')
