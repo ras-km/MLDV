@@ -5,23 +5,21 @@ import joblib
 import time
 
 st.set_page_config(
-	layout="centered",  # Can be "centered" or "wide". In the future also "dashboard", etc.
-	initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
-	page_title="Premium Prediction",  # String or None. Strings get appended with "• Streamlit". 
-	page_icon="images/medical_insurance5.jpg",  # String, anything supported by st.image, or None.
+	layout="centered",
+	initial_sidebar_state="auto",
+	page_title="Premium Prediction",
+	page_icon="images/medical_insurance5.jpg",
 )
 
-with st.container(border=True):
-    st.header(':rainbow[Insurance Premium Prediction]', divider='rainbow')
-    st.write(':orange[This app predicts the health insurance premium based on user information input]')
-    st.write('Please expand the sidebar on the top left arrow!')
-    st.write('##')
+st.header(':rainbow[Insurance Premium Prediction]', divider='rainbow')
+st.write(':orange[This app predicts the health insurance premium based on user information input]')
+st.write('Please expand the sidebar on the top left arrow!')
+st.write('##')
 
 image_path = "images/medical_insurance5.jpg"
 image = st.image(image_path, use_column_width=True)
 
-with st.container():
-    st.header(':orange[Please fill in these information for an estimate of your premium]', divider='rainbow')
+st.subheader(':orange[Please fill in these information for an estimate of your premium]', divider='rainbow')
 
 # Load the model and scaler
 model = joblib.load('ridge_model.pkl')
@@ -29,15 +27,15 @@ scaler = joblib.load('scaler.pkl')
 
 # Function to get user input
 def get_user_input():
-    diabetes = st.sidebar.checkbox(':orange[Diabetes]', value=False, help=':orange[Select if you have Diabetes]')
-    blood_pressure_problems = st.sidebar.checkbox(':orange[Blood Pressure]', value=False, help=':orange[Select if you have Blood Pressure Problems]')
-    any_transplants = st.sidebar.checkbox(':orange[Transplants]', value=False, help=':orange[Select if you have any Transplants]')
-    any_chronic_diseases = st.sidebar.checkbox(':orange[Chronic Diseases]', value=False, help=':orange[Select if you have any Chronic Diseases]')
-    known_allergies = st.sidebar.checkbox(':orange[Allergies]', value=False, help=':orange[Select if you have Known Allergies]')
-    history_of_cancer_in_family = st.sidebar.checkbox(':orange[History of Cancer]', value=False, help=':orange[Select if there is a History of Cancer in Family]')
-    bmi = st.sidebar.slider(':orange[BMI]', 0.0, 100.0, 25.0, help=':orange[Use slider to select your BMI]')
-    age_group = st.sidebar.selectbox(':orange[Age Group]', ['18-30', '31-40', '41-50', '51-60', '61-70'], help=':orange[Select your age group]')
-    major_surgeries = st.sidebar.selectbox(':orange[Major Surgeries]', [0, 1, 2, 3], help=':orange[How many times have you had major surgeries before?]')
+    diabetes = st.checkbox(':orange[Diabetes]', value=False, help=':orange[Select if you have Diabetes]')
+    blood_pressure_problems = st.checkbox(':orange[Blood Pressure]', value=False, help=':orange[Select if you have Blood Pressure Problems]')
+    any_transplants = st.checkbox(':orange[Transplants]', value=False, help=':orange[Select if you have any Transplants]')
+    any_chronic_diseases = st.checkbox(':orange[Chronic Diseases]', value=False, help=':orange[Select if you have any Chronic Diseases]')
+    known_allergies = st.checkbox(':orange[Allergies]', value=False, help=':orange[Select if you have Known Allergies]')
+    history_of_cancer_in_family = st.checkbox(':orange[History of Cancer]', value=False, help=':orange[Select if there is a History of Cancer in Family]')
+    bmi = st.slider(':orange[BMI]', 0.0, 100.0, 25.0, help=':orange[Use slider to select your BMI]')
+    age_group = st.selectbox(':orange[Age Group]', ['18-30', '31-40', '41-50', '51-60', '61-70'], help=':orange[Select your age group]')
+    major_surgeries = st.selectbox(':orange[Major Surgeries]', [0, 1, 2, 3], help=':orange[How many times have you had major surgeries before?]')
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
@@ -68,20 +66,14 @@ input_features_scaled = scaler.transform(user_features.values)
 # Prediction
 predicted_price = model.predict(input_features_scaled)
 
-columns = st.columns(1)  # Use the number of columns you want
+st.subheader(f"The predicted premium is: :orange[${predicted_price[0]:,.2f}]", divider='rainbow')   
+st.write(":orange[Leave your name and email, and we will send you a quotation!]", divider='rainbow')
+st.write("##")
 
-with columns[0]:
-    st.write("---")
+name = st.text_input(":orange[Name]", key="name", placeholder="Enter Name")
+email = st.text_input(":orange[Email]", key="email", placeholder="someone@somewhere.com")
 
-with st.form("quotation_form"):
-    st.subheader(f"The predicted premium is: :orange[${predicted_price[0]:,.2f}]", divider='rainbow')   
-    st.write(":orange[Leave your name and email, and we will send you a quotation!]", divider='rainbow')
-    st.write("##")
-
-    name = st.text_input(":orange[Name]", key="name", placeholder="Enter Name")
-    email = st.text_input(":orange[Email]", key="email", placeholder="someone@somewhere.com")
-
-    submit_button = st.form_submit_button(":orange[Send quotation]:e-mail:")
+submit_button = st.button(":orange[Send quotation]:e-mail:")
 
 # Process the form data after submission
 if submit_button:
