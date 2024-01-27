@@ -27,15 +27,21 @@ scaler = joblib.load('scaler.pkl')
 
 # Function to get user input
 def get_user_input():
-    diabetes = st.checkbox(':orange[Diabetes]', value=False, help=':orange[Select if you have Diabetes]')
-    blood_pressure_problems = st.checkbox(':orange[Blood Pressure]', value=False, help=':orange[Select if you have Blood Pressure Problems]')
-    any_transplants = st.checkbox(':orange[Transplants]', value=False, help=':orange[Select if you have any Transplants]')
-    any_chronic_diseases = st.checkbox(':orange[Chronic Diseases]', value=False, help=':orange[Select if you have any Chronic Diseases]')
-    known_allergies = st.checkbox(':orange[Allergies]', value=False, help=':orange[Select if you have Known Allergies]')
-    history_of_cancer_in_family = st.checkbox(':orange[History of Cancer]', value=False, help=':orange[Select if there is a History of Cancer in Family]')
-    bmi = st.slider(':orange[BMI]', 0.0, 100.0, 25.0, help=':orange[Use slider to select your BMI]')
-    age_group = st.selectbox(':orange[Age Group]', ['18-30', '31-40', '41-50', '51-60', '61-70'], help=':orange[Select your age group]')
-    major_surgeries = st.selectbox(':orange[Major Surgeries]', [0, 1, 2, 3], help=':orange[How many times have you had major surgeries before?]')
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+       diabetes = st.checkbox(':orange[Diabetes]', value=False, help=':orange[Select if you have Diabetes]')
+       blood_pressure_problems = st.checkbox(':orange[Blood Pressure]', value=False, help=':orange[Select if you have Blood Pressure Problems]')
+       any_transplants = st.checkbox(':orange[Transplants]', value=False, help=':orange[Select if you have any Transplants]')
+       any_chronic_diseases = st.checkbox(':orange[Chronic Diseases]', value=False, help=':orange[Select if you have any Chronic Diseases]')
+       known_allergies = st.checkbox(':orange[Allergies]', value=False, help=':orange[Select if you have Known Allergies]')
+       history_of_cancer_in_family = st.checkbox(':orange[History of Cancer]', value=False, help=':orange[Select if there is a History of Cancer in Family]') 
+    
+    with col2:
+       bmi = st.slider(':orange[BMI]', 0.0, 100.0, 25.0, help=':orange[Use slider to select your BMI]')
+       age_group = st.selectbox(':orange[Age Group]', ['18-30', '31-40', '41-50', '51-60', '61-70'], help=':orange[Select your age group]')
+       major_surgeries = st.selectbox(':orange[Major Surgeries]', [0, 1, 2, 3], help=':orange[How many times have you had major surgeries before?]')
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
