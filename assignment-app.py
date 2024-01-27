@@ -11,15 +11,15 @@ st.set_page_config(
 	page_icon="images/medical_insurance5.jpg",
 )
 
-st.header(':rainbow[Insurance Premium Prediction]', divider='rainbow')
-st.write(':orange[This app predicts the health insurance premium based on user information input]')
+st.header('Insurance Premium Prediction', divider='rainbow')
+st.write('This app predicts the health insurance premium based on user information input')
 st.write('Please expand the sidebar on the top left arrow!')
 st.write('##')
 
 image_path = "images/medical_insurance5.jpg"
 image = st.image(image_path, use_column_width=True)
 
-st.subheader(':orange[Please fill in these information for an estimate of your premium]', divider='rainbow')
+st.subheader('Please fill in these information for an estimate of your premium', divider='rainbow')
 
 # Load the model and scaler
 model = joblib.load('ridge_model.pkl')
@@ -31,17 +31,17 @@ def get_user_input():
     col1, col2 = st.columns(2)
     
     with col1:
-       diabetes = st.checkbox(':orange[Diabetes]', value=False, help=':orange[Select if you have Diabetes]')
-       blood_pressure_problems = st.checkbox(':orange[Blood Pressure]', value=False, help=':orange[Select if you have Blood Pressure Problems]')
-       any_transplants = st.checkbox(':orange[Transplants]', value=False, help=':orange[Select if you have any Transplants]')
-       any_chronic_diseases = st.checkbox(':orange[Chronic Diseases]', value=False, help=':orange[Select if you have any Chronic Diseases]')
-       known_allergies = st.checkbox(':orange[Allergies]', value=False, help=':orange[Select if you have Known Allergies]')
-       history_of_cancer_in_family = st.checkbox(':orange[History of Cancer]', value=False, help=':orange[Select if there is a History of Cancer in Family]') 
+       diabetes = st.checkbox('Diabetes', value=False, help='Select if you have Diabetes')
+       blood_pressure_problems = st.checkbox('Blood Pressure', value=False, help='Select if you have Blood Pressure Problems')
+       any_transplants = st.checkbox('Transplants', value=False, help='Select if you have any Transplants')
+       any_chronic_diseases = st.checkbox('Chronic Diseases', value=False, help='Select if you have any Chronic Diseases')
+       known_allergies = st.checkbox('Allergies', value=False, help='Select if you have Known Allergies')
+       history_of_cancer_in_family = st.checkbox('History of Cancer', value=False, help='Select if there is a History of Cancer in Family') 
     
     with col2:
-       bmi = st.slider(':orange[BMI]', 0.0, 100.0, 25.0, help=':orange[Use slider to select your BMI]')
-       age_group = st.selectbox(':orange[Age Group]', ['18-30', '31-40', '41-50', '51-60', '61-70'], help=':orange[Select your age group]')
-       major_surgeries = st.selectbox(':orange[Major Surgeries]', [0, 1, 2, 3], help=':orange[How many times have you had major surgeries before?]')
+       bmi = st.slider('BMI', 0.0, 100.0, 25.0, help='Use slider to select your BMI')
+       age_group = st.selectbox('Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select your age group')
+       major_surgeries = st.selectbox('Major Surgeries', [0, 1, 2, 3], help='How many times have you had major surgeries before?')
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
@@ -72,19 +72,19 @@ input_features_scaled = scaler.transform(user_features.values)
 # Prediction
 predicted_price = model.predict(input_features_scaled)
 
-st.subheader(f"The predicted premium is: :orange[${predicted_price[0]:,.2f}]", divider='rainbow')   
-st.write(":orange[Leave your name and email, and we will send you a quotation!]", divider='rainbow')
+st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}", divider='rainbow')   
+st.write("Leave your name and email, and we will send you a quotation!", divider='rainbow')
 st.write("##")
 
-name = st.text_input(":orange[Name]", key="name", placeholder="Enter Name")
-email = st.text_input(":orange[Email]", key="email", placeholder="someone@somewhere.com")
+name = st.text_input(":Name", key="name", placeholder="Enter Name")
+email = st.text_input("Email", key="email", placeholder="someone@somewhere.com")
 
-submit_button = st.button(":orange[Send quotation]:e-mail:")
+submit_button = st.button("Send quotation:e-mail:")
 
 # Process the form data after submission
 if submit_button:
     # Perform actions with the collected data (name and email)
-    progress_text = ":orange[Sending quotation....]"
+    progress_text = "Sending quotation...."
     my_bar = st.progress(0, text=progress_text)
 
     for percent_complete in range(100):
@@ -92,4 +92,4 @@ if submit_button:
         my_bar.progress(percent_complete + 1, text=progress_text)
     time.sleep(1)
     my_bar.empty()
-    st.write(f"Thank you, :orange[{name}]! A quotation has been sent to {email}")
+    st.write(f"Thank you, {name}! A quotation has been sent to {email}")
