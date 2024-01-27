@@ -11,7 +11,7 @@ st.set_page_config(
 	page_icon="images/medical_insurance5.jpg",
 )
 
-st.header('Insurance Premium Prediction', divider=':color:#99ced3:')
+st.header('Insurance Premium Prediction', divider='rainbow')
 st.write('This app predicts the health insurance premium based on user information input')
 st.write('Please expand the sidebar on the top left arrow!')
 st.write('##')
@@ -19,7 +19,7 @@ st.write('##')
 image_path = "images/medical_insurance5.jpg"
 image = st.image(image_path, use_column_width=True)
 
-st.subheader('Please fill in these information for an estimate of your premium', divider=':color:#99ced3:')
+st.subheader('Please fill in these information for an estimate of your premium', divider='rainbow')
 
 # Load the model and scaler
 model = joblib.load('ridge_model.pkl')
@@ -72,8 +72,8 @@ input_features_scaled = scaler.transform(user_features.values)
 # Prediction
 predicted_price = model.predict(input_features_scaled)
 
-st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}", divider=':color:#99ced3:')   
-st.write("Leave your name and email, and we will send you a quotation!", divider=':color:#99ced3:')
+st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}", divider='rainbow')   
+st.write("Leave your name and email, and we will send you a quotation!", divider='rainbow')
 st.write("##")
 
 name = st.text_input(":Name", key="name", placeholder="Enter Name")
@@ -93,3 +93,4 @@ if submit_button:
     time.sleep(1)
     my_bar.empty()
     st.write(f"Thank you, {name}! A quotation has been sent to {email}")
+divider=':color:')
