@@ -9,7 +9,7 @@ st.set_page_config(
 	initial_sidebar_state="auto",
 	page_title="Premium Prediction",
 	page_icon="images/medical_insurance5.jpg",
-)s
+)
 
 st.header('Insurance Premium Prediction', divider='rainbow')
 st.write('This app predicts the health insurance premium based on user information input')
