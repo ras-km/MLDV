@@ -21,6 +21,12 @@ st.markdown(
         body {{
             background-image: {background_image_url};
             background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;  /* Adjust the height as needed */
+        }}
+        .stApp {{
+            background-color: transparent;  /* Make the Streamlit app background transparent */
         }}
     </style>
     """,
