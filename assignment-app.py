@@ -26,6 +26,18 @@ background_image = """
 
 st.markdown(background_image, unsafe_allow_html=True)
 
+input_style = """
+<style>
+div[data-baseweb="base-input"] > div:first-child > input {
+    width: 100px;  # Set the desired width for text input
+    height: 30px;  # Set the desired height for text input
+    padding: 5px;  # Adjust padding if needed
+}
+</style>
+"""
+
+st.markdown(input_style, unsafe_allow_html=True)
+
 # Main content
 st.title('Insurance Premium Prediction')
 st.write('This app predicts the health insurance premium based on user information input.')
@@ -48,7 +60,7 @@ def get_user_input():
     any_chronic_diseases = st.sidebar.checkbox('Chronic Diseases', value=False, help='Select if you have any Chronic Diseases')
     known_allergies = st.sidebar.checkbox('Allergies', value=False, help='Select if you have Known Allergies')
     history_of_cancer_in_family = st.sidebar.checkbox('History of Cancer', value=False, help='Select if there is a History of Cancer in Family') 
-    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0, help='Use slider to select your BMI')
+    bmi = st.sidebar.slider('BMI', 0.0, 50.0, 25.0, help='Use slider to select your BMI')
     age_group = st.sidebar.selectbox('Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select your age group')
     major_surgeries = st.sidebar.selectbox('Major Surgeries', [0, 1, 2, 3], help='How many times have you had major surgeries before?')
 
