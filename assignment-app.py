@@ -4,6 +4,22 @@ import numpy as np
 import joblib
 import time
 
+# Set the background image URL
+background_image_url = "url('images/app_bg.jpg')"
+
+# Use st.markdown to inject custom CSS for the background image
+st.markdown(
+    f"""
+    <style>
+        body {{
+            background-image: {background_image_url};
+            background-size: cover;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.set_page_config(
 	layout="centered",
 	initial_sidebar_state="auto",
