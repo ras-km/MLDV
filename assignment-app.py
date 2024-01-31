@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import joblib
 import time
+import base64
+import os
+
 
 st.set_page_config(
 	layout="centered",
@@ -11,35 +14,53 @@ st.set_page_config(
 	page_icon="images/medical_insurance5.jpg",
 )
 
-# Set the background image URL
-background_image_url = "url('images/app_bg.jpg')"
 
-# Use st.markdown to inject custom CSS for the background image
-st.markdown(
-    f"""
-    <style>
-        body {{
-            background-image: {background_image_url};
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;  /* Adjust the height as needed */
-        }}
-        .stApp {{
-            background-color: transparent;  /* Make the Streamlit app background transparent */
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+original_title = '<h1 style="font-family: Sans serif; color:#99CED3; font-size: 30px;">Insurance Premium Prediction</h1>'
+st.markdown(original_title, unsafe_allow_html=True)
 
-st.header('Insurance Premium Prediction', divider='rainbow')
+
+# Set the background image
+background_image = """
+<style>
+[data-testid="stAppViewContainer"] > .main {
+    background-image: url("https://images.pexels.com/photos/169789/pexels-photo-169789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
+    background-position: center;  
+    background-repeat: no-repeat;
+}
+</style>
+"""
+
+st.markdown(background_image, unsafe_allow_html=True)
+
+st.text_input("", placeholder="Streamlit CSS ")
+
+input_style = """
+<style>
+input[type="text"] {
+    background-color: transparent;
+    color: #a19eae;  // This changes the text color inside the input box
+}
+div[data-baseweb="base-input"] {
+    background-color: transparent !important;
+}
+[data-testid="stAppViewContainer"] {
+    background-color: transparent !important;
+}
+</style>
+"""
+st.markdown(input_style, unsafe_allow_html=True)
+
+#background_image_url = "C:\\Users\\mrmoh\\Desktop\\MLDV\\assignment\\images\\app_bg.jpg"
+#set_bg_hack_url(background_image_url)
+    
+#st.header('Insurance Premium Prediction', divider='rainbow')
 st.write('This app predicts the health insurance premium based on user information input')
 st.write('Please expand the sidebar on the top left arrow!')
 st.write('##')
 
-image_path = "images/medical_insurance5.jpg"
-image = st.image(image_path, use_column_width=True)
+#image_path = "images/medical_insurance5.jpg"
+#image = st.image(image_path, use_column_width=True)
 
 st.subheader('Please fill in these information for an estimate of your premium', divider='rainbow')
 
