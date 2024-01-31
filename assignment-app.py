@@ -3,29 +3,22 @@ import pandas as pd
 import numpy as np
 import joblib
 import time
-import base64
-import os
 
-
+# Set page configuration
 st.set_page_config(
-	layout="centered",
-	initial_sidebar_state="auto",
-	page_title="Premium Prediction",
-	page_icon="images/medical_insurance5.jpg",
+    layout="wide",  # Adjust the layout as needed
+    initial_sidebar_state="expanded",  # Expand the sidebar by default
+    page_title="Premium Prediction",
+    page_icon="images/medical_insurance5.jpg",
 )
 
-
-original_title = '<h1 style="font-family: Sans serif; color:#99CED3; font-size: 30px;">Insurance Premium Prediction</h1>'
-st.markdown(original_title, unsafe_allow_html=True)
-
-
-# Set the background image
+# Set the background image using CSS
 background_image = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
     background-image: url("https://images.pexels.com/photos/169789/pexels-photo-169789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-    background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
-    background-position: center;  
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
 </style>
@@ -33,36 +26,15 @@ background_image = """
 
 st.markdown(background_image, unsafe_allow_html=True)
 
-st.text_input("", placeholder="Streamlit CSS ")
-
-input_style = """
-<style>
-input[type="text"] {
-    background-color: transparent;
-    color: #a19eae;  // This changes the text color inside the input box
-}
-div[data-baseweb="base-input"] {
-    background-color: transparent !important;
-}
-[data-testid="stAppViewContainer"] {
-    background-color: transparent !important;
-}
-</style>
-"""
-st.markdown(input_style, unsafe_allow_html=True)
-
-#background_image_url = "C:\\Users\\mrmoh\\Desktop\\MLDV\\assignment\\images\\app_bg.jpg"
-#set_bg_hack_url(background_image_url)
-    
-#st.header('Insurance Premium Prediction', divider='rainbow')
-st.write('This app predicts the health insurance premium based on user information input')
+# Main content
+st.title('Insurance Premium Prediction')
+st.write('This app predicts the health insurance premium based on user information input.')
 st.write('Please expand the sidebar on the top left arrow!')
 st.write('##')
 
-#image_path = "images/medical_insurance5.jpg"
-#image = st.image(image_path, use_column_width=True)
-
-st.subheader('Please fill in these information for an estimate of your premium', divider='rainbow')
+# Sidebar
+st.sidebar.header('User Input')
+st.sidebar.write('Fill in the following information for an estimate of your premium.')
 
 # Load the model and scaler
 model = joblib.load('ridge_model.pkl')
@@ -70,21 +42,15 @@ scaler = joblib.load('scaler.pkl')
 
 # Function to get user input
 def get_user_input():
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-       diabetes = st.checkbox('Diabetes', value=False, help='Select if you have Diabetes')
-       blood_pressure_problems = st.checkbox('Blood Pressure', value=False, help='Select if you have Blood Pressure Problems')
-       any_transplants = st.checkbox('Transplants', value=False, help='Select if you have any Transplants')
-       any_chronic_diseases = st.checkbox('Chronic Diseases', value=False, help='Select if you have any Chronic Diseases')
-       known_allergies = st.checkbox('Allergies', value=False, help='Select if you have Known Allergies')
-       history_of_cancer_in_family = st.checkbox('History of Cancer', value=False, help='Select if there is a History of Cancer in Family') 
-    
-    with col2:
-       bmi = st.slider('BMI', 0.0, 100.0, 25.0, help='Use slider to select your BMI')
-       age_group = st.selectbox('Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select your age group')
-       major_surgeries = st.selectbox('Major Surgeries', [0, 1, 2, 3], help='How many times have you had major surgeries before?')
+    diabetes = st.sidebar.checkbox('Diabetes', value=False, help='Select if you have Diabetes')
+    blood_pressure_problems = st.sidebar.checkbox('Blood Pressure', value=False, help='Select if you have Blood Pressure Problems')
+    any_transplants = st.sidebar.checkbox('Transplants', value=False, help='Select if you have any Transplants')
+    any_chronic_diseases = st.sidebar.checkbox('Chronic Diseases', value=False, help='Select if you have any Chronic Diseases')
+    known_allergies = st.sidebar.checkbox('Allergies', value=False, help='Select if you have Known Allergies')
+    history_of_cancer_in_family = st.sidebar.checkbox('History of Cancer', value=False, help='Select if there is a History of Cancer in Family') 
+    bmi = st.sidebar.slider('BMI', 0.0, 100.0, 25.0, help='Use slider to select your BMI')
+    age_group = st.sidebar.selectbox('Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select your age group')
+    major_surgeries = st.sidebar.selectbox('Major Surgeries', [0, 1, 2, 3], help='How many times have you had major surgeries before?')
 
     # Create a DataFrame with the processed features
     user_features = pd.DataFrame({
@@ -115,14 +81,15 @@ input_features_scaled = scaler.transform(user_features.values)
 # Prediction
 predicted_price = model.predict(input_features_scaled)
 
-st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}", divider='rainbow')   
-st.write("Leave your name and email, and we will send you a quotation!", divider='rainbow')
+# Display result
+st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}")
+st.write("Leave your name and email, and we will send you a quotation!")
 st.write("##")
 
-name = st.text_input(":Name", key="name", placeholder="Enter Name")
+name = st.text_input("Name", key="name", placeholder="Enter Name")
 email = st.text_input("Email", key="email", placeholder="someone@somewhere.com")
 
-submit_button = st.button("Send quotation:e-mail:")
+submit_button = st.button("Send quotation")
 
 # Process the form data after submission
 if submit_button:
