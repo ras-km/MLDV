@@ -4,6 +4,13 @@ import numpy as np
 import joblib
 import time
 
+st.set_page_config(
+	layout="centered",
+	initial_sidebar_state="auto",
+	page_title="Premium Prediction",
+	page_icon="images/medical_insurance5.jpg",
+)
+
 # Set the background image URL
 background_image_url = "url('images/app_bg.jpg')"
 
@@ -18,13 +25,6 @@ st.markdown(
     </style>
     """,
     unsafe_allow_html=True
-)
-
-st.set_page_config(
-	layout="centered",
-	initial_sidebar_state="auto",
-	page_title="Premium Prediction",
-	page_icon="images/medical_insurance5.jpg",
 )
 
 st.header('Insurance Premium Prediction', divider='rainbow')
