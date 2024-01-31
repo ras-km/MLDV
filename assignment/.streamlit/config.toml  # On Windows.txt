@@ -1,0 +1,5 @@
+[theme]
+primaryColor="#99CED3"
+backgroundColor="#1868AA"
+secondaryBackgroundColor="#022140"
+textColor="#99CED3"
