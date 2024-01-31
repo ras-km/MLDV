@@ -33,7 +33,7 @@ st.write('Please expand the sidebar on the top left arrow!')
 st.write('##')
 
 # Sidebar
-st.sidebar.header('User Input')
+#st.sidebar.header('User Input')
 st.sidebar.write('Fill in the following information for an estimate of your premium.')
 
 # Load the model and scaler
