@@ -26,6 +26,17 @@ background_image = """
 
 st.markdown(background_image, unsafe_allow_html=True)
 
+st.markdown(
+    """
+    <style>
+    body {
+        color: #99CED3;
+        background-color: #1868AA;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+
 input_style = """
 <style>
 div[data-baseweb="base-input"] > div:first-child > input {
