@@ -7,7 +7,7 @@ import time
 # Set page configuration
 st.set_page_config(
     layout="wide",  # Adjust the layout as needed
-    initial_sidebar_state="expanded",  # Expand the sidebar by default
+    initial_sidebar_state="collapsed",  # Expand the sidebar by default
     page_title="Premium Prediction",
     page_icon="images/medical_insurance5.jpg",
 )
