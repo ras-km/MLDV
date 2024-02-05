@@ -26,17 +26,6 @@ background_image = """
 
 st.markdown(background_image, unsafe_allow_html=True)
 
-st.markdown(
-    """
-    <style>
-    body {
-        color: #99CED3;
-        background-color: #1868AA;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True)
-
 input_style = """
 <style>
 div[data-baseweb="base-input"] > div:first-child > input {
@@ -49,9 +38,11 @@ div[data-baseweb="base-input"] > div:first-child > input {
 
 st.markdown(input_style, unsafe_allow_html=True)
 
+
 # Main content
-st.title('Insurance Premium Prediction')
-st.write('This app predicts the health insurance premium based on user information input.')
+container = st.container(border=True)
+container.write('# Insurance Premium Prediction')
+container.write('This app predicts the health insurance premium based on user information input.')
 st.write('Please expand the sidebar on the top left arrow!')
 st.write('##')
 
@@ -105,12 +96,16 @@ input_features_scaled = scaler.transform(user_features.values)
 predicted_price = model.predict(input_features_scaled)
 
 # Display result
-st.subheader(f"The predicted premium is: ${predicted_price[0]:,.2f}")
-st.write("Leave your name and email, and we will send you a quotation!")
+container = st.container(border=True)
+container.write(f" ## The predicted premium is: ${predicted_price[0]:,.2f}")
 st.write("##")
 
-name = st.text_input("Name", key="name", placeholder="Enter Name")
-email = st.text_input("Email", key="email", placeholder="someone@somewhere.com")
+container = st.container(border=True)
+container.write("Leave your name and email, and we will send you a quotation!")
+
+container = st.container(border=True)
+name = container.text_input("Name", key="name", placeholder="Enter Name")
+email = container.text_input("Email", key="email", placeholder="someone@somewhere.com")
 
 submit_button = st.button("Send quotation")
 
