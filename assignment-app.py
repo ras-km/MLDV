@@ -16,7 +16,7 @@ st.set_page_config(
 background_image = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
-    background-image: url("https://www.pexels.com/photo/brunette-woman-with-transparent-umbrella-on-rainy-day-12154734/");
+    background-image: url("https://images.pexels.com/photos/169789/pexels-photo-169789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
