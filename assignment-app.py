@@ -16,7 +16,7 @@ st.set_page_config(
 background_image = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
-    background-image: url("https://www.pexels.com/photo/medicine-pills-on-the-blue-background-9155926/");
+    background-image: url("https://images.pexels.com/photos/13105350/pexels-photo-13105350.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
