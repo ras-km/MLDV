@@ -105,7 +105,7 @@ container.write("Leave your name and email, and we will send you a quotation!")
 
 col1, col2, col3 = st.columns([1, 2, 1])
 
-with col2:
+with col1:
     container = st.container(border=False)
     name = container.text_input("Name", key="name", placeholder="Enter Name")
     email = container.text_input("Email", key="email", placeholder="someone@somewhere.com")
