@@ -56,14 +56,14 @@ scaler = joblib.load('scaler.pkl')
 
 # Function to get user input
 def get_user_input():
-    diabetes = st.sidebar.checkbox('Diabetes', value=False, help='Select if you have Diabetes')
-    blood_pressure_problems = st.sidebar.checkbox('Blood Pressure', value=False, help='Select if you have Blood Pressure Problems')
-    any_transplants = st.sidebar.checkbox('Transplants', value=False, help='Select if you have any Transplants')
-    any_chronic_diseases = st.sidebar.checkbox('Chronic Diseases', value=False, help='Select if you have any Chronic Diseases')
-    known_allergies = st.sidebar.checkbox('Allergies', value=False, help='Select if you have Known Allergies')
-    history_of_cancer_in_family = st.sidebar.checkbox('History of Cancer', value=False, help='Select if there is a History of Cancer in Family') 
+    diabetes = st.sidebar.checkbox('Diabetes', value=False, help='Check this if you have Diabetes')
+    blood_pressure_problems = st.sidebar.checkbox('Blood Pressure', value=False, help='Check this if you have Blood Pressure abnormality')
+    any_transplants = st.sidebar.checkbox('Transplants', value=False, help='Check this if you previously had any Organ Transplant/s')
+    any_chronic_diseases = st.sidebar.checkbox('Chronic Diseases', value=False, help='Check this if you have any history of Chronic Disease/s')
+    known_allergies = st.sidebar.checkbox('Allergies', value=False, help='Check this if you have Known Allergy')
+    history_of_cancer_in_family = st.sidebar.checkbox('History of Cancer', value=False, help='Check this for history of Cancer in your Family') 
     bmi = st.sidebar.slider('BMI', 0.0, 50.0, 25.0, help='Use slider to select your BMI')
-    age_group = st.sidebar.selectbox('Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Select your age group')
+    age_group = st.sidebar.selectbox('Age Group', ['18-30', '31-40', '41-50', '51-60', '61-70'], help='Check your current age group')
     major_surgeries = st.sidebar.selectbox('Major Surgeries', [0, 1, 2, 3], help='How many times have you had major surgeries before?')
 
     # Create a DataFrame with the processed features
