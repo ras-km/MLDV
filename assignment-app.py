@@ -40,7 +40,7 @@ st.markdown(input_style, unsafe_allow_html=True)
 
 
 # Main content
-container = st.container(border=True)
+container = st.container(border=False)
 container.write('# Insurance Premium Prediction')
 container.write('This app predicts the health insurance premium based on user information input.')
 st.write('Please expand the sidebar on the top left arrow!')
@@ -96,14 +96,14 @@ input_features_scaled = scaler.transform(user_features.values)
 predicted_price = model.predict(input_features_scaled)
 
 # Display result
-container = st.container(border=True)
+container = st.container(border=False)
 container.write(f" ## The predicted premium is: ${predicted_price[0]:,.2f}")
 st.write("##")
 
-container = st.container(border=True)
+container = st.container(border=False)
 container.write("Leave your name and email, and we will send you a quotation!")
 
-container = st.container(border=True)
+container = st.container(border=False)
 name = container.text_input("Name", key="name", placeholder="Enter Name")
 email = container.text_input("Email", key="email", placeholder="someone@somewhere.com")
 
