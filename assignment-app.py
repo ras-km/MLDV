@@ -16,7 +16,7 @@ st.set_page_config(
 background_image = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
-    background-image: url("https://www.istockphoto.com/photo/family-health-insurance-and-medical-protection-concept-stethoscope-nearby-gm2242294578-656656809");
+    background-image: url("https://www.pexels.com/photo/medicine-pills-on-the-blue-background-9155926/");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
